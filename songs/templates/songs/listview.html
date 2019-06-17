@@ -1,0 +1,67 @@
+{% extends "songs/base.html" %}
+{% block body %}
+	<div class="well"style="float: right;">
+		<form method="POST">
+			{% csrf_token %}
+		    <label class="radio-inline">
+		      <input type="radio" name="optradio" id="az" checked>A-Z
+		    </label>
+		    <label class="radio-inline">
+		      <input type="radio" name="optradio" id="za">Z-A
+		    </label>
+		    <label class="radio-inline">
+		      <input type="radio" name="list" id="list">List
+		    </label>
+		    <label class="radio-inline">
+		      <input type="radio" name="list" id="template" checked>Template
+		    </label>
+			<button type="submit" class="btn btn-success btn-sm">Retry</button>
+		</form>
+	</div>
+	<br><br><br><br><br>
+
+     <div class="well ">
+<div class="row">
+        <div class="col-md-1"><h4>No.</h4></div>
+        <div class="col-md-2 text text-right">
+			<h4>Song Title</h4>
+        </div>
+        <div class="col-md-3 text text-left">
+			<h4>Composer</h4> 
+		</div>
+        <div class="col-md-2 text text-left">
+			<h4>Other Artist</h4>
+		</div>
+        <div class="col-md-3 text text-left">
+			<h4>Youtube link </h4>
+		</div>
+        
+</div>
+<hr>
+	{% for song in songs %}
+    <div class="row">
+        <div class="col-md-1">{{song.id}}</div>
+        <div class="col-md-2 text text-right">
+			<h4><a href="{% url 'songs-songlyrics' song.id %}">{{ song.title }}</a></h4>
+        </div>
+        <div class="col-md-3 text text-left">
+			<h4><p class="mr-2">{{ song.composer }}</p></h4> 
+		</div>
+        <div class="col-md-2 text text-left">
+			<p class="mr-2">{{ song.featuring }}</p>
+		</div>
+        <div class="col-md-3 text text-left">
+			<a class="mr-2">{{ song.link }}</a> 
+		</div>
+        
+    </div>
+    <hr>
+	{% empty %}
+	<div class="alert alert-danger">
+		<strong><h3>NO SUCH SONG EXIST!</h3></strong>
+		<p>None of our songs contain <strong>{{ searchterm }}</strong>.</p>
+	</div>
+		
+	{% endfor %}
+    </div>
+{% endblock %}

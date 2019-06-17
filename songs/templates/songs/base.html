@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+		body{
+			background  : url("https://raw.githubusercontent.com/anshrathod/image/master/audio-cassette-cassette-tape-1626481.jpg") ;
+			background-size:cover;
+			color:white;
+		}
+	</style>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} LYRICO {% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'example/style.css' %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body >
+    <div class="container">
+    <nav class="navbar navbar-inverse fixed">
+        <div class="row">
+            <!-- Header -->
+            <div class="float-left">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{% url 'songs-home'%}"><d style="color:#d82c3c;font-size:25px;padding-left: 50% ">LYRICO</d></a>
+                </div>
+            </div>  
+            <!-- Items -->
+            <div style="float:right;padding-right: 2%">
+                <div class="collapse navbar-collapse" id="topNavBar">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                              Songs</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <ul>
+                                  <li><a class="dropdown-item" href="{% url 'songs-listsongs'%}">LIST VIEW</a></li>
+                                  <li><a class="dropdown-item" href="{% url 'songs-allsongs'%}">BOX VIEW</a></li>
+                                </ul>
+                            </div>
+                      </li><!-- 
+                        <li>
+                            <a href="#"><d style="color:#fde441">GALLERY</d></a>
+                        </li>
+                        <li>
+                            <a href="#"><d style="color:#fde441">ABOUT US</d></a>
+                        </li>-->
+                        <!-- 
+
+                        <li>
+                            <a href="{% url 'songs-login'%}"><d  class="signup" style="color:#fde441">SIGN UP</d></a>
+                        </li> -->
+                        <li >
+                            <form class="form-inline " method="POST" style="padding-top: 3%;">
+                                {% csrf_token %}
+                                <input class="form-control " type="search" placeholder="Search Song" aria-label="Search" name="search" >
+                                <button class="btn btn-outline-success " type="submit">Search</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+
+{% block body %}
+{% endblock %}
+</div>
+</body><!-- 
+<style>
+.footer {
+ 
+}
+</style>
+<div class="container">
+    <div class="footer" style=" position: fixed;left: 10%;margin-top:2%;bottom: -5%;width: 80%; color: white;text-align: center;">
+        <div class="navbar navbar-inverse">
+            <div class="footer-copyright text-center py-3">© 2019 Copyright:
+                <a href="#">Lyrico.in</a>
+            </div>
+        </div>
+    </div>
+</div> -->
+</html>
