@@ -7,43 +7,71 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 
 def home(request):
-	if request.method =='POST':
+	if request.method =='song':
 		songs = Song.objects.all()
 		searchterm=''
-		if 'search' in request.POST:
-			searchterm = request.POST['search']
+		if 'search' in request.song:
+			searchterm = request.song['search']
 			songs1=songs.filter(title__contains=searchterm)
 			songs2=songs.filter(composer__contains=searchterm)
 			songs3=songs.filter(featuring__contains=searchterm)
 			songs=songs1|songs2|songs3
-		context = {'searchterm': searchterm,'songs':songs}
+		songz = zip(songs,range(len(songs)+1)[1:])
+		context = {'searchterm': searchterm,'songs':songz}
 		return render(request, 'songs/listview.html', context) 
 	return render(request,'songs/base.html')
+
+class SongUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+	model=Song
+	fields=['title','lyrics','img']
+
+	def form_valid(self,form):
+		self.request.user in [form.instance.composer,form.instance.featuring]
+		return super().form_valid(form)
+
+	def test_func(self):
+		song=self.get_object()
+		if self.request.user in [song.composer,song.featuring]:
+			return True
+		return False
+
+class SongDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Song
+    success_url = '/'
+
+    def test_func(self):
+        # print(self.get_object())
+        # if self.request.user == self.get_object().composer:
+        return True
+        # return False
+
 
 def list(request):
 	songs = Song.objects.all()
 	searchterm=''
-	if request.method =='POST':
-		if 'search' in request.POST:
-			searchterm = request.POST['search']
+	if request.method =='song':
+		if 'search' in request.song:
+			searchterm = request.song['search']
 			songs1=songs.filter(title__contains=searchterm)
 			songs2=songs.filter(composer__contains=searchterm)
 			songs3=songs.filter(featuring__contains=searchterm)
 			songs=songs1|songs2|songs3
-	context = {'searchterm': searchterm,'songs':songs}
+	songz = zip(songs,range(len(songs)+1)[1:])
+	context = {'searchterm': searchterm,'songs':songz}
 	return render(request, 'songs/listview.html', context) 
 
 def box(request):
 	songs = Song.objects.all()
 	searchterm=''
-	if request.method =='POST':
-		if 'search' in request.POST:
-			searchterm = request.POST['search']
+	if request.method =='song':
+		if 'search' in request.song:
+			searchterm = request.song['search']
 			songs1=songs.filter(title__contains=searchterm)
 			songs2=songs.filter(composer__contains=searchterm)
 			songs3=songs.filter(featuring__contains=searchterm)
 			songs=songs1|songs2|songs3
-	context = {'searchterm': searchterm,'songs':songs}
+	songz = zip(songs,range(len(songs)+1)[1:])
+	context = {'searchterm': searchterm,'songs':songz}
 	return render(request, 'songs/boxlistview.html', context) 
 
 class SongDetailView(DetailView):
@@ -51,38 +79,7 @@ class SongDetailView(DetailView):
 	fields=['title','img','lyrics','featuring','composer','album','link']
 	template_name='songs/detailview.html'
 
-def login(request, method = [ 'POST']):
-	if request.method=='POST':
-		print('qwerty')
-		username=request.POST['username']
-		password=request.POST['password']
-		if username == 'anshrathod':
-			if password == 'testing123':
-				return redirect('songs-add')
-		return render(request,'songs/login.html')
 
-	else :
-		print('asdf')
-		return render(request,'songs/login.html')
-
-@login_required
-def addsong(request):
-	if request.method=='POST':
-		print(request.POST)
-		title=request.POST['title']
-		lyrics=request.POST['lyrics']
-		composer=request.POST['composer']
-		featuring=request.POST['featuring']
-		album=request.POST['album']
-		img=request.POST['img']
-		link=request.POST['link']
-		featuring = ': '+ featuring
-		link='https://www.youtube.com/embed/'+ link[link.index('=')+1:]+'?rel=0'
-		song = Song(title=title,lyrics=lyrics,composer=composer,featuring=featuring,album=album,img=img,link=link)
-		song.save()
-		return render(request,'songs/addsong.html')		
-	else:
-		return render(request,'songs/addsong.html')
 
 def about(request):
 	template = loader.get_template('songs/about.html')
@@ -92,9 +89,8 @@ def about(request):
 
 
 
-
-	# if 'search' in request.POST:
-	# 	searchterm=request.POST['search']
+	# if 'search' in request.song:
+	# 	searchterm=request.song['search']
 	# 	songs=songs.filter(title__contains=searchterm)
 	# context = {'searchterm': searchterm,
 	# 			'songs':songs}

@@ -2,7 +2,7 @@
 {% block body %}
 <div class="col-md-3"></div>
 <div class="jumbotron col-md-6">
-	<form action="" method='POST'>
+	<form  method='POST'>
 		{% csrf_token %}
 		<div class="form-group  ">
 		    <label>Username</label>
@@ -12,7 +12,12 @@
 	        <label >Password</label>
 	        <input type="password" class="form-control" id="password" name="password" aria-describedby="password" placeholder="Enter password">
 	    </div>
-		<button type="submit" class="btn btn-primary">Log In</button>
+		<div class="row">
+		<div class="col-md-6">
+		<button type="submit" class="btn btn-primary ">Log In</button>
+		</div>
+		<a class="col-md-6 text text-muted text-right" href="{% url 'songs-signup'%}">New User? Sign Up</a>
+		</div>
 	</form>
 </div>
 
