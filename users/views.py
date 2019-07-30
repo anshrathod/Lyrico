@@ -109,20 +109,25 @@ def profile(request):
 	return render(request,'users/display_profile.html',context)
 
 def addprofile(request):
-	if request.method =="POST":
-		username=request.POST['username']
-		user = User.objects.filter(username=username)
-		profile=Profile.objects.get(user=user)
-		profile.fname=request.POST['fname']
-		profile.lname=request.POST['lname']
-		profile.gender=request.POST['gender']
-		profile.age=request.POST['age']
-		profile.bio=request.POST['bio']
-		profile.pic=request.FILES['pic']
-		profile.save()
+	if request.user.profile.image:
+		return redirect('songs-profile')
 	else:
-		return
-	return 
+		if request.method =="POST":
+			username=request.POST.get('username')
+			print(username)
+			users = User.objects.filter(username=username)
+			user = users[0] 
+			profile=Profile.objects.get(user=user)
+			profile.fname=request.POST['fname']
+			profile.lname=request.POST['lname']
+			profile.gender=request.POST['gender']
+			profile.age=request.POST['age']
+			profile.bio=request.POST['bio']
+			profile.image=request.FILES['pic']
+			profile.save()
+		else:
+			return render(request,'users/addprofile.html')
+		return render(request,'songs/base.html')
 
 def update(request):
 		profile = request.user

@@ -1,0 +1,54 @@
+{% extends "songs/base.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="row">
+    <div class="well col-md-5" style="margin-left:2%">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Your Profile</legend>
+            </fieldset>
+            <div class="col-md-12  col-sm-12">
+                Add a Profile Pic
+                <div class="col-md-12"><br><input class="form-control" type="file" placeholder="Profile-Pic" name="pic" value="{{user.profile.img.url}}" aria-label="Phno">
+                </div>
+            <br>
+            </div >
+            <div class="col-md-12  col-sm-12"><br></div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <input class="form-control mr-sm-3" type="text" name="fname" placeholder="First name" value="{{user.first_name}}" aria-label="Fname">
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <input class="form-control mr-sm-3" type="text" name="lname" placeholder="Last name" value="{{user.last_name}}" aria-label="Lname">
+            </div>
+            <div class="col-md-12 col-sm-12" style="display:none;">
+                <br>
+                <input class="form-control mr-sm-3" type="text" name="username" placeholder="Username" value="{{user.username}}"aria-label="Username" >
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <br>
+                <input class="form-control mr-sm-3" type="text" name="username" placeholder="Username" value="{{user.username}}"aria-label="Username" disabled>
+            </div>
+            <div class="col-md-12  col-sm-12">
+                <br>
+                <input class="form-control mr-sm-3" type="email" name="email" placeholder="Email-id" value="{{ user.email }}"aria-label="Email" disabled>
+            </div>
+            <div class="col-md-12  col-sm-12">
+                <br>
+                <textarea type="text" class="form-control mr-sm-3" name="bio" placeholder="Your Bio" aria-label="Bio" rows="3"></textarea>
+            </div>
+            <div class="col-md-12  col-sm-12">
+            <br>
+                <input type="text" class="form-control mr-sm-3" name="gender" placeholder="Gender" value="" aria-label="Gender" >
+            </div>
+            <div class="col-md-12  col-sm-12"><br>
+            <input class="form-control mr-sm-3" type="integer" name="age" placeholder="Age" value="{"aria-label="Age">
+            </div> 
+            <div class="col-md-12">
+            <br>
+            <button type="submit" class="btn btn-success"onclick="location.href='{% url 'songs-addprofile' %}'" >Add to Profile</button>
+           </div>
+        </form>
+    </div>
+</div>
+{% endblock  %}

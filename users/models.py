@@ -9,7 +9,7 @@ class Profile(models.Model):
         ('Others','Others')
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='profile_pics/',null=True)
+    image = models.ImageField(upload_to='profile_pics/')
     bio = models.TextField(blank=True)
     age = models.IntegerField(blank=True,null=True)
     gender = models.CharField(max_length=10)
