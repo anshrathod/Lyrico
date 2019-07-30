@@ -37,10 +37,11 @@ def signup(request):
 			mail=user.cleaned_data.get('email')
 			if valid_email(mail):
 				user.save()
-				messages.success(request, f'Account has been created for {username}! Please login to continue')
+				messages.success(request, f'Account has been created for {username}! Please Fill the details to build up your Profile.')
 				useracc=User.objects.get(username=username)
 				profile=Profile(user = useracc)
 				profile.save()
+				login(request,useracc)
 			else:
 				messages.warning(request,f'Your account couldn\'t be created...')
 				return redirect('songs-signup') 
@@ -120,10 +121,8 @@ def addprofile(request):
 		profile.pic=request.FILES['pic']
 		profile.save()
 	else:
-
-
-
-
+		return
+	return 
 
 def update(request):
 		profile = request.user
