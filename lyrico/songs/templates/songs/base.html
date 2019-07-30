@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+		body{
+			background  : url("https://raw.githubusercontent.com/anshrathod/image/master/audio-cassette-cassette-tape-1626481.jpg") ;
+			background-size:cover;
+            background-repeat: no-repeat;
+			color:white;
+		}
+	</style>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} LYRICO {% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body >
+    <div >
+    <nav class="navbar navbar-inverse fixed">
+        <div class="row">
+            <!-- Header -->
+            <div class="float-left">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{% url 'songs-home'%}"><d style="color:#d82c3c;font-size:25px;padding-left: 50% ">LYRICO</d></a>
+                </div>
+            </div>  
+            <!-- Items -->
+            <div style="float:right;padding-right: 2%">
+                <div class="collapse navbar-collapse" id="topNavBar">
+                    <ul class="nav navbar-nav">
+                        <li><a style="color:#fde441" href="{% url 'songs-listsongs'%}">LIST VIEW</a></li>
+                        <li><a style="color:#fde441" href="{% url 'songs-allsongs'%}">BOX VIEW</a></li>
+                        <li >
+                            <form class="form-inline " method="POST" style="padding-top: 3%;">
+                                {% csrf_token %}
+                                <input class="form-control " type="search" placeholder="Search Song" aria-label="Search" name="search" >
+                                <button class="btn btn-outline-success " type="submit">Search</button>
+                            </form>
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li><a style="color:#fde441" href="{% url 'songs-profile'%}">Welcome,{{user}}</a></li>
+                            <li><a style="color:#fde441" href="{% url 'songs-logout'%}">LOG OUT</a></li>
+                        {% else %}
+                        <li><a style="color:#fde441" href="{% url 'songs-login'%}">LOG IN</a></li>
+                        <li><a style="color:#fde441" href="{% url 'songs-signup'%}">REGISTER</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{message}}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% block body %}
+{% endblock %}
+</div>
+</body>
+<br><br><br><br><br>
+{% block footer %}
+{% endblock %}
+</html>
