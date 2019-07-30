@@ -34,12 +34,12 @@
                 </div>
             </div>  
             <!-- Items -->
-            <div style="float:right;padding-right: 2%">
+            <div style="float:right;padding-right: 5%;margin-right:2%">
                 <div class="collapse navbar-collapse" id="topNavBar">
                     <ul class="nav navbar-nav">
-                        <li><a style="color:#fde441" href="{% url 'songs-listsongs'%}">LIST VIEW</a></li>
-                        <li><a style="color:#fde441" href="{% url 'songs-allsongs'%}">BOX VIEW</a></li>
-                        <li >
+                        <li><a style="color:#fde441" href="{% url 'songs-listsongs'%}">ALL SONGS</a></li>
+                        {% comment %} <li><a style="color:#fde441" href="{% url 'songs-allsongs'%}">BOX VIEW</a></li> {% endcomment %}
+                        <li>
                             <form class="form-inline " method="POST" style="padding-top: 3%;">
                                 {% csrf_token %}
                                 <input class="form-control " type="search" placeholder="Search Song" aria-label="Search" name="search" >

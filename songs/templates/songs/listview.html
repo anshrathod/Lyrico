@@ -1,8 +1,76 @@
-{% extends "songs/base.html" %}
-{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<style>
+		body{
+			background  : url("https://raw.githubusercontent.com/anshrathod/image/master/audio-cassette-cassette-tape-1626481.jpg") ;
+			background-size:cover;
+            background-repeat: no-repeat;
+			color:white;
+		}
+	</style>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} LYRICO {% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body >
+    <div >
+    <nav class="navbar navbar-inverse fixed">
+        <div class="row">
+            <!-- Header -->
+            <div class="float-left">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{% url 'songs-home'%}"><d style="color:#d82c3c;font-size:25px;padding-left: 50% ">LYRICO</d></a>
+                </div>
+            </div>  
+            <!-- Items -->
+            <div style="float:right;padding-right: 5%;margin-right:2%">
+                <div class="collapse navbar-collapse" id="topNavBar">
+                    <ul class="nav navbar-nav">
+                        <li><a style="color:#fde441" href="{% url 'songs-listsongs'%}">ALL SONGS</a></li>
+                        {% comment %} <li><a style="color:#fde441" href="{% url 'songs-allsongs'%}">BOX VIEW</a></li> {% endcomment %}
+                        <li>
+                            {% comment %} <form class="form-inline " method="POST" style="padding-top: 3%;">
+                                {% csrf_token %}
+                                <input class="form-control " type="search" placeholder="Search Song" aria-label="Search" name="search" >
+                                <button class="btn btn-outline-success " type="submit">Search</button>
+                            </form> {% endcomment %}
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li><a style="color:#fde441" href="{% url 'songs-profile'%}">Welcome,{{user}}</a></li>
+                            <li><a style="color:#fde441" href="{% url 'songs-logout'%}">LOG OUT</a></li>
+                        {% else %}
+                        <li><a style="color:#fde441" href="{% url 'songs-login'%}">LOG IN</a></li>
+                        <li><a style="color:#fde441" href="{% url 'songs-signup'%}">REGISTER</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{message}}
+        </div>
+    {% endfor %}
+{% endif %}
+
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 <div id="songs">
-	<div class="well"style="float: right;">
+	<div class="well col-md-5"style="float: right;">
 		{% comment %} <form method="POST">
 			{% csrf_token %}
 		    <label class="radio-inline">
@@ -19,15 +87,23 @@
 		    </label>
 			<button type="submit" class="btn btn-success btn-sm">Retry</button>
 		</form> {% endcomment %}
-    <p class="col-md-2">Sort By:</p>
-    <div class="col-md-2"><button class="sort btn btn-primary" data-sort="title">A-Z</button></div>
-    <div class="col-md-2"><button class="sort btn btn-primary" data-sort="title">Z-A</button></div>
-    <div class="col-md-3"><button class="sort btn btn-primary" data-sort="composer">Composer</button></div>
-    <div class="col-md-2"><button class="sort btn btn-primary" data-sort="genre">Genre</button></div>
-	</div>
-	<br><br><br><br><br>
-  <div class="well">
+    <div class="form-group">
+      <div class="input-group">
+      <span class="input-group-addon glyphicon glyphicon-search"></span>
+        <input class="search col-md-12 form-control " style="margin-top:0.5%" placeholder="Search"/>
+      </div>
+    </div>
     <div class="row">
+      <p class="col-md-3 col-sm-3" style="margin-top:2%">Sort By:</p>
+      <div class="col-md-3 col-sm-2"><button class="sort btn btn-primary btn-block" style="margin-top:1%" data-sort="title">Title</button></div>
+      <div class="col-md-3 col-sm-2"><button class="sort btn btn-primary btn-block" style="margin-top:1%" data-sort="composer">Composer</button></div>
+      <div class="col-md-3 col-sm-2"><button class="sort btn btn-primary btn-block" style="margin-top:1%" data-sort="genre">Genre</button></div>
+    </div>
+  </div>
+	<br><br><br><br><br>
+	<br><br><br>
+  <div class="well">
+    <div class="row" style="padding:2%;">
       <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1 text text-right"><h4>No.</h4></div>
       <div class="col-md-2 col-sm-2 col-xs-2 col-lg-2 text text-left"><h4>Song Title</h4></div>
       <div class="col-md-2 col-sm-2 col-xs-2 col-lg-2 text text-right"><h4>Composer</h4> </div>
@@ -38,13 +114,13 @@
     <hr>
     <div class="list">
       {% for song,range in songs %}
-        <div class="row">
+        <div class="row" style="padding : 2%;">
           <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1 text text-right">
             <span class="id">{{range }}</span>
           </div>
           <div class="col-md-2 col-sm-2 col-xs-2 col-lg-2 text text-left " >
             <a href="{% url 'songs-details' song.id %}">
-              <span class="title">{{ song.title }}</span>
+              <span class="title text text-muted" style="font-size:125%;color:blck;">{{ song.title }}</span>
             </a>
           </div>
           <div class="col-md-2 col-sm-2 col-xs-2 col-lg-2 text text-right">
@@ -57,7 +133,7 @@
             <span class="genre">{{ song.genre }}</span> 
           </div>
           <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3 text text-left">
-            <a class='ytlink' href="{{ song.ytlink }}" >{{ song.ytlink }}</a> 
+            <a class='ytlink text text-muted' href="{{ song.ytlink }}" >{{ song.ytlink }}</a> 
           </div>    
         </div>
        
@@ -70,11 +146,10 @@
     </div>
   </div>
 </div>
-{% endblock %}
 
-
-
-{% block footer %}
+</div>
+</body>
+<br><br><br><br><br>
 
 <style>
 .foooter {
@@ -125,4 +200,4 @@
     var userList = new List('songs', options);
 </script>
 
-{% endblock %}
+</html>

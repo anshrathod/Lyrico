@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 
 from users import views as uviews
@@ -15,9 +17,10 @@ urlpatterns = [
     path('add/',uviews.addsong, name='songs-add'),
     path('signup/',uviews.signup , name='songs-signup'),
     path('profile/',uviews.profile,name='songs-profile'),
+    path('profile/add/',uviews.addprofile,name='songs-addprofile'),
     path('profile/update/',uviews.update,name='songs-update'),
     path('logout/',uviews.logout_user , name='songs-logout'),
     path('password/change/',uviews.changepass,name='songs-password'),
     path('songs/delete/<int:pk>/',sviews.SongDeleteView.as_view(),name='songs-delete'),
-    path('songs/update/<int:pk>/',sviews.SongUpdateView.as_view(),name='songs-updatesong')
+    path('songs/update/<int:pk>/',sviews.updatesong,name='songs-updatesong')
 ]

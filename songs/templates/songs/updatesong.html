@@ -1,0 +1,38 @@
+{% extends "songs/base.html" %}
+{% block body %}
+<div class="container" style="padding: 5% 25% 0% 25%">
+    <div class="well" >
+        <form action='' method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-header">
+                <h2 style="text-align: center;"> Update Song </h2>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label >Song Title</label>
+                <input type="text" class="form-control" id="title" name="title" aria-describedby="title" placeholder="" value="{{object.title}}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Lyrics</label>
+                <textarea class="form-control" id="lyrics" name="lyrics" aria-describedby="lyrics" required>{{ object.lyrics }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Youtube Link</label>
+                <input type="text" class="form-control" id="ytlink" name="ytlink" aria-describedby="ytlink" value="{{object.ytlink}}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Song Cover</label>
+                <input type="file" class="form-control" id="image" name="image" aria-describedby="image" value="{{object.img.url}}">
+            </div><div class="form-group">
+                <label>Song Audio</label>
+                <input type="file" class="form-control" id="audio" name="audio" aria-describedby="audio" value="{{object.img.url}}">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Song</button>
+        </form>
+    </div>
+</div>
+{% endblock  %}

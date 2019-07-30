@@ -1,16 +1,22 @@
 {% extends "songs/base.html" %}
 {% block body %}
 	<div class="well">
-		<form method="POST">
-			{% csrf_token %}
-			<fieldset class="form-group">
-				<legend class="border-bottom mb-4"><h2>Delete Song</h2></legend>
-				<h3 class="text text-muted">Are you sure that you want to delete the Song : {{ object.title }}</h3>
-			</fieldset>
-			<div clsss="form-group">
-				<button class="btn btn-danger btn-block" type="submit">Yes, delete</button>
-				<a class="btn btn-warning btn-block" href="{% url 'songs-details' object.id %}">Cancel</a>
-			</div>
-		</form>
+		<div class="row">
+			<form method="POST">
+				{% csrf_token %}
+				<fieldset class="form-group">
+					<legend class="border-bottom mb-4 " style="margin-left:2%;"><h2>Delete Song</h2></legend>
+					<h3 class="text text-muted"  style="margin-left:2%;">Are you sure that you want to delete the Song : {{ object.title }}</h3>
+				</fieldset>
+				<div clsss="form-group">
+					<div class="col-md-6">
+						<button class="btn btn-danger btn-block" type="submit">Yes, delete</button>
+					</div>
+					<div class="col-md-6">
+						<button class="btn btn-warning btn-block" href="{% url 'songs-details' object.id %}">Cancel</button>
+					</div>
+				</div>
+			</form>
+		</div>
 	</div>
 {% endblock  %}

@@ -4,7 +4,7 @@
 <body>
 <div class="container" style="padding: 5% 25% 0% 25%">
   <div class="jumbotron" >
-  <form action='' method="POST">
+  <form action='' method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-header">
 
@@ -45,6 +45,11 @@
 <div class="form-group">
     <label>Song Cover</label>
     <input type="file" class="form-control" id="img" name="img" aria-describedby="img" placeholder="Enter cover" required>
+</div>
+
+<div class="form-group">
+    <label>Audio</label>
+    <input type="file" class="form-control" id="audio" name="audio" aria-describedby="audio" placeholder="Enter audio" required>
 </div>
 <button type="submit" class="btn btn-primary">Add Song</button>
 </form>
