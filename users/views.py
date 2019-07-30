@@ -18,13 +18,13 @@ def login_user(request):
 		if user is not None:
 			if user.is_active:
 				login(request, user)
-				messages.success(request, f'{username},Just Logged In!')
+				messages.success(request, ('{},Just Logged In!'.format(username)))
 				return redirect('songs-home')
 			else:
-				messages.warning(request,f'Your account has been deactivated.')
+				messages.warning(request,'Your account has been deactivated.')
 				return render(request, 'users/login.html')
 		else:
-			messages.warning(request,f'The account details entered were wrong.')
+			messages.warning(request,'The account details entered were wrong.')
 			return render(request, 'users/login.html')
 	return render(request, 'users/login.html')
 	
@@ -37,13 +37,13 @@ def signup(request):
 			mail=user.cleaned_data.get('email')
 			if valid_email(mail):
 				user.save()
-				messages.success(request, f'Account has been created for {username}! Please Fill the details to build up your Profile.')
+				messages.success(request, ('Account has been created for {}! Please Fill the details to build up your Profile.'.format(username)))
 				useracc=User.objects.get(username=username)
 				profile=Profile(user = useracc)
 				profile.save()
 				login(request,useracc)
 			else:
-				messages.warning(request,f'Your account couldn\'t be created...')
+				messages.warning(request,'Your account couldn\'t be created...')
 				return redirect('songs-signup') 
 			return redirect('songs-addprofile')
 	else:
@@ -93,7 +93,7 @@ def addsong(request):
 
 def logout_user(request):
 	logout(request)
-	messages.warning(request,f'You have successfully logged out.')
+	messages.warning(request,'You have successfully logged out.')
 	return redirect('songs-home')
 
 @login_required
@@ -176,9 +176,9 @@ def update(request):
 				userprofile.save()
 				profile.save()
 				if a>1:
-					messages.success(request, f'Your Account has been updated!')
+					messages.success(request, 'Your Account has been updated!')
 			except:
-				messages.warning(request,f'An Error Occured while updating your profile.')
+				messages.warning(request,'An Error Occured while updating your profile.')
 			finally:
 				return redirect('songs-profile')
 		songs = Song.objects.all()

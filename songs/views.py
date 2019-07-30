@@ -59,9 +59,9 @@ def updatesong(request,pk):
 		song.ytlink = ytlink
 		try:
 			song.save()
-			messages.success(request, f'You just updated a Song')
+			messages.success(request, 'You just updated a Song')
 		except:
-			messages.warning(request,f'An Error was encountered while updating your song')
+			messages.warning(request,'An Error was encountered while updating your song')
 		return redirect('songs-profile')
 	else:
 		song = Song.objects.get(id=pk)
