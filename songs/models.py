@@ -12,6 +12,7 @@ class Song(models.Model):
     ytlink = models.CharField(max_length=1000 ,default='')
     genre = models.CharField(max_length=100,blank=True)
     audio = models.FileField(upload_to='audio/',default='')
+    
     def __str__(self):
         return self.title
 
