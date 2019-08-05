@@ -1,8 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
+from django.contrib.auth import update_session_auth_hash
+from django.urls import reverse
 
 from songs.models import Song
 
@@ -112,7 +115,19 @@ def valid_pass(password):
 	return 'Your Password must contain at least 8 characters.'
 
 def changepass(request):
-	return render(request,'users/display_profile.html')
+	if request.method == 'POST':
+		form = PasswordChangeForm(data=request.POST, user=request.user)
+		if form.is_valid():
+			form.save()
+			update_session_auth_hash(request, form.user)
+			return redirect('songs-profile')
+		else:
+			return redirect(reverse('songs-password'))
+	else:
+		form = PasswordChangeForm(user=request.user)
+
+		args = {'form': form}
+		return render(request, 'users/change_password.html', args)
 
 
 @login_required
