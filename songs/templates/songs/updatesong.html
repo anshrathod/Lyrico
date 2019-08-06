@@ -26,10 +26,24 @@
 
             <div class="form-group">
                 <label>Song Cover</label>
-                <input type="file" class="form-control" id="image" name="image" aria-describedby="image" value="{{object.img.url}}">
-            </div><div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img class="img-thumbnail" src="{{ object.img.url }}">
+                        </div>
+                    <div class="col-md-6"><br><br><br>
+                        <input type="file" class="form-control" id="image" name="image" aria-describedby="image" value="{{object.img.url}}">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
                 <label>Song Audio</label>
-                <input type="file" class="form-control" id="audio" name="audio" aria-describedby="audio" value="{{object.img.url}}">
+                <div class="row">
+                    <p class="col-md-1 text text-success"><br>Current:<p>
+                    <audio controls class="col-md-11"style="padding-right:0%">{{song.audio.url}}
+                        <source src="{{ object.audio.url }}" type="audio/mpeg">
+                    </audio>
+                </div> 
+                <input type="file" class="form-control" id="audio" name="audio" aria-describedby="audio" value="{{ audio }}">
             </div>
             <button type="submit" class="btn btn-primary">Update Song</button>
         </form>

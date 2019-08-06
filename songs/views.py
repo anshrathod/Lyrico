@@ -43,12 +43,17 @@ def updatesong(request,pk):
 		song = Song.objects.get(id=pk)
 		title = request.POST['title']
 		lyrics = request.POST['lyrics']
-		print(request.FILES['audio'])
 		if request.FILES['image']:
 			image = request.FILES['image']
 			song.img = image
-		if request.FILES['audio']:
+		else:
+			image = song.img
+			song.img = image
+		if request.FILES['audio']!= song.audio:
 			audio = request.FILES['audio']
+			song.audio = audio
+		else:
+			audio = song.audio
 			song.audio = audio
 		ytlink = request.POST['ytlink']
 		link=ytlink
@@ -65,7 +70,8 @@ def updatesong(request,pk):
 		return redirect('songs-profile')
 	else:
 		song = Song.objects.get(id=pk)
-		context={'object':song}
+		audio = str(song.audio).split('/')[1]
+		context={'object':song,'audio':audio}
 		return render(request,'songs/updatesong.html',context)
 
 class SongDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):

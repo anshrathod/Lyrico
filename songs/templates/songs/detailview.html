@@ -2,13 +2,13 @@
 {% block body %}
 <div class = "well">
   <div class="col-md-6 ">
-    <div class="col-md-6">
+    <div class="col-md-6">{{ song.img.url}}
       <img class="img-thumbnail" src="{{ song.img.url }}" style="max-width:110%;max-height:110%"><br><br>
-      <div class="col-md-12">
-      <audio controls style="padding-right:0%">{{song.audio.url}}
-        <source src="{{ song.audio.url }}" type="audio/mpeg">
-      </audio> 
-    </div>
+      {% comment %} <div class="col-md-12">
+        <audio controls style="padding-right:0%">{{song.audio.url}}
+          <source src="{{ song.audio.url }}" type="audio/mpeg">
+        </audio> 
+      </div> {% endcomment %}
     </div>
     <div class="col-md-6">
       <h2 >{{ object.title }}</h2>
@@ -16,6 +16,11 @@
         <small class="text text-muted">{{ object.featuring}}</small><br>
       Album :
         <small class="text-muted">{{object.album}}</small>
+      </div>
+      <div class="col-md-12">
+        <audio controls style="padding-right:0%">{{song.audio.url}}
+          <source src="{{ song.audio.url }}" type="audio/mpeg">
+        </audio> 
       </div>
       {% if song.composer == user.username %}
         <div class="col-md-12">

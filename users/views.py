@@ -149,7 +149,7 @@ def addsong(request):
 		song = Song(title=title,lyrics=lyrics,composer=composer,featuring=featuring,album=album,img=img,link=link,ytlink=ytlink,audio=audio,genre=genre)
 		song.save()
 
-		return render(request,'users/display_profile.html')		
+		return redirect('songs-profile')	
 	else:
 		return render(request,'songs/addsong.html')
 

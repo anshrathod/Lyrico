@@ -9,10 +9,10 @@
 					<h3 class="text text-muted"  style="margin-left:2%;">Are you sure that you want to delete the Song : {{ object.title }}</h3>
 				</fieldset>
 				<div clsss="form-group">
-					<div class="col-md-6">
+					<div class="col-md-3">
 						<button class="btn btn-danger btn-block" type="submit">Yes, delete</button>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-3">
 						<a class="btn btn-warning btn-block" href="{% url 'songs-details' object.id %}">Cancel</a>
 					</div>
 				</div>
