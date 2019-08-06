@@ -2,12 +2,11 @@
 <html lang="en">
 <style>
 		body{
-			background  : url("https://raw.githubusercontent.com/anshrathod/image/master/audio-cassette-cassette-tape-1626481.jpg") ;
+			background  : url("media/background_1200.jpg") ;
 			background-size:cover;
             background-repeat: no-repeat;
-			color:white;
 		}
-	</style>
+</style>
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} LYRICO {% endblock %}</title>
@@ -19,10 +18,8 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div>
     <nav class="navbar navbar-inverse">
         <div class="row">
-            <!-- Header -->
             <div class="float-left">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
@@ -33,12 +30,10 @@
                     <a class="navbar-brand" href="{% url 'songs-home'%}"><p style="color:#d82c3c;font-size:25px;margin-left:50%">LYRICO</p></a>
                 </div>
             </div>  
-            <!-- Items -->
             <div style="float:right;padding-right: 5%;margin-right:2%">
                 <div class="collapse navbar-collapse" id="topNavBar">
                     <ul class="nav navbar-nav">
                         <li><a style="color:#fde441" href="{% url 'songs-listsongs'%}">ALL SONGS</a></li>
-                        {% comment %} <li><a style="color:#fde441" href="{% url 'songs-allsongs'%}">BOX VIEW</a></li> {% endcomment %}
                         <li>
                             <form class="form-inline " method="POST" style="padding-top: 3%;">
                                 {% csrf_token %}
@@ -58,7 +53,6 @@
             </div>
         </div>
     </nav>
-</div>
 <div class="container">
 {% if messages %}
     {% for message in messages %}
