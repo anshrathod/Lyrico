@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from songs.models import Song
+from PIL import Image
 
 class Profile(models.Model):
     GENDER_CHOICES=[
@@ -13,3 +14,13 @@ class Profile(models.Model):
     bio = models.TextField(blank=True)
     age = models.IntegerField(blank=True,null=True)
     gender = models.CharField(max_length=10)
+
+    def save(self):
+        super().save()
+
+        img = Image.open(self.image.path)
+
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)

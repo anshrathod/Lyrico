@@ -2,7 +2,7 @@
 {% block body %}
 <div class = "well">
   <div class="col-md-6 ">
-    <div class="col-md-6">{{song.img.url}}
+    <div class="col-md-6">
       <img class="img-thumbnail" src="{{ song.img.url }}" style="max-width:110%;max-height:110%"><br><br>
       <div class="col-md-12">
       <audio controls style="padding-right:0%">{{song.audio.url}}
@@ -19,13 +19,9 @@
       </div>
       {% if song.composer == user.username %}
         <div class="col-md-12">
-            <a class="btn btn-warning btn-block mt-1 mb-1" href="{% url 'songs-updatesong' object.id %}">Update</a>
-		      	<a class="btn btn-danger btn-block  mt-1 mb-1" href="{% url 'songs-delete' object.id%}">Delete</a>
+            <div class="col-md-6"> <a class=" btn btn-warning btn-block mt-1 mb-1" href="{% url 'songs-updatesong' object.id %}">Update</a></div>
+		      	<div class="col-md-6"> <a class="btn btn-danger btn-block  mt-1 mb-1" href="{% url 'songs-delete' object.id%}">Delete</a> </div>
 	  		</div>
-        {% elif user.username in song.featuring %}
-		      	<div style="padding-top:52%">
-              <a class="btn btn-warning btn-block mt-1 mb-1" href="{% url 'songs-updatesong' object.id %}">Update</a>
-		      	</div>
 		  {% endif %}
   </div>
   <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">

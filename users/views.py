@@ -11,6 +11,7 @@ from songs.models import Song
 
 from .models import Profile
 from .signup import ProfileUpdateForm, UserRegisterForm, UserUpdateForm
+from PIL import Image
 
 
 def login_user(request):
@@ -147,6 +148,7 @@ def addsong(request):
 		link='https://www.youtube.com/embed/'+ link[link.index('=')+1:]+'?rel=0'
 		song = Song(title=title,lyrics=lyrics,composer=composer,featuring=featuring,album=album,img=img,link=link,ytlink=ytlink,audio=audio,genre=genre)
 		song.save()
+
 		return render(request,'users/display_profile.html')		
 	else:
 		return render(request,'songs/addsong.html')
