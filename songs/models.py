@@ -20,12 +20,15 @@ class Song(models.Model):
     def get_absolute_url(self):
         return reverse('project-details',kwargs={'pk': self.pk})
 
-    def save(self,abc):
+    def save(self):
         super().save()
-        if abc:
-            image = Image.open(self.img.path)
 
-            if image.height > 300 or image.width > 300:
-                output_size = (300, 300)
-                image.thumbnail(output_size)
-                image.save(self.img.path)
+        image = Image.open(self.img.path)
+
+        if image.height > 300 or image.width > 300:
+            output_size = (300, 300)
+            image.thumbnail(output_size)
+            image.save(self.img.path)
+
+    def saave(self):
+        super().save()
