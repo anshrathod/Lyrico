@@ -55,39 +55,42 @@ def signup(request):
 	return render(request,'users/register.html',{'form':user})
 
 def register(request):
-	if request.method == 'POST':
-		password1 = request.POST['password1']
-		password2 = request.POST['password2']
-		fname = request.POST['fname']
-		lname = request.POST['lname']
-		username = request.POST['username']
-		email = request.POST['email']
-		context={
-					'fname':fname,
-					'lname':lname,
-					'username':username,
-					'email':email,
-				}
-		if password1 == password2:
-			passval = valid_pass(password1)
-			if passval == 'True':
-				if valid_email(email):
-					user = User(first_name = fname,last_name = lname,username=username,email=email,password=password1)
-					user.save()
-					messages.success(request, ('Account has been created for {}! Please Fill the details to build up your Profile.'.format(username)))
-					profile=Profile(user = user)
-					profile.save()
-					login(request,user)
-					return render(request,'users/addprofile.html')
+	try:
+		if request.method == 'POST':
+			password1 = request.POST['password1']
+			password2 = request.POST['password2']
+			fname = request.POST['fname']
+			lname = request.POST['lname']
+			username = request.POST['username']
+			email = request.POST['email']
+			context={
+						'fname':fname,
+						'lname':lname,
+						'username':username,
+						'email':email,
+					}
+			if password1 == password2:
+				passval = valid_pass(password1)
+				if passval == 'True':
+					if valid_email(email):
+						user = User(first_name = fname,last_name = lname,username=username,email=email,password=password1)
+						user.save()
+						messages.success(request, ('Account has been created for {}! Please Fill the details to build up your Profile.'.format(username)))
+						profile=Profile(user = user)
+						profile.save()
+						login(request,user)
+						return redirect('songs-addprofile')
+					else:
+						messages.warning(request,'Your account couldn\'t be created...Enter Valid Email-id.')
+						return render(request,'users/signup.html',context)
 				else:
-					messages.warning(request,'Your account couldn\'t be created...Enter Valid Email-id.')
-					return render(request,'users/signup.html',context)
+					messages.warning(request,passval)
+					return render(request,'users/signup.html',context) 
 			else:
-				messages.warning(request,passval)
-				return render(request,'users/signup.html',context) 
-		else:
-			messages.warning(request,'Both The Passwords Entered Didn\'t Match.')
-			return render(request,'users/signup.html',context)
+				messages.warning(request,'Both The Passwords Entered Didn\'t Match.')
+				return render(request,'users/signup.html',context)
+	except Exception as e:
+		messages.error(request,str(e))
 	return render(request,'users/signup.html',{})
 
 def valid_email(mail):
@@ -171,25 +174,23 @@ def profile(request):
 	return render(request,'users/display_profile.html',context)
 
 def addprofile(request):
-	if request.user.profile.image:
-		return redirect('songs-profile')
+	
+	if request.method =="POST":
+		username=request.POST.get('username')
+		print(username)
+		users = User.objects.filter(username=username)
+		user = users[0] 
+		profile=Profile.objects.get(user=user)
+		profile.fname=request.POST['fname']
+		profile.lname=request.POST['lname']
+		profile.gender=request.POST['gender']
+		profile.age=request.POST['age']
+		profile.bio=request.POST['bio']
+		profile.image=request.FILES['pic']
+		profile.save()
 	else:
-		if request.method =="POST":
-			username=request.POST.get('username')
-			print(username)
-			users = User.objects.filter(username=username)
-			user = users[0] 
-			profile=Profile.objects.get(user=user)
-			profile.fname=request.POST['fname']
-			profile.lname=request.POST['lname']
-			profile.gender=request.POST['gender']
-			profile.age=request.POST['age']
-			profile.bio=request.POST['bio']
-			profile.image=request.FILES['pic']
-			profile.saave()
-		else:
-			return render(request,'users/addprofile.html')
-		return render(request,'songs/base.html')
+		return render(request,'users/addprofile.html')
+	return render(request,'songs/base.html')
 
 def update(request):
 		profile = request.user
@@ -236,7 +237,7 @@ def update(request):
 				userprofile.bio=bio
 				userprofile.image=pic
 				userprofile.save()
-				profile.saave()
+				profile.save()
 				if a>1:
 					messages.success(request, 'Your Account has been updated!')
 			except:
