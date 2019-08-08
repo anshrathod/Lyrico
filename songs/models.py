@@ -20,7 +20,7 @@ class Song(models.Model):
     def get_absolute_url(self):
         return reverse('project-details',kwargs={'pk': self.pk})
 
-    def save(self):
+    def saave(self):
         super().save()
 
         image = Image.open(self.img.path)
@@ -29,6 +29,3 @@ class Song(models.Model):
             output_size = (300, 300)
             image.thumbnail(output_size)
             image.save(self.img.path)
-
-    def saave(self):
-        super().save()
