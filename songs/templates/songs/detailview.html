@@ -2,7 +2,7 @@
 {% block body %}
 <div class = "well">
   <div class="col-md-6 ">
-    <div class="col-md-6">{{ song.img.url}}
+    <div class="col-md-6">
       <img class="img-thumbnail" src="{{ song.img.url }}" style="max-width:110%;max-height:110%"><br><br>
       {% comment %} <div class="col-md-12">
         <audio controls style="padding-right:0%">{{song.audio.url}}
@@ -10,7 +10,7 @@
         </audio> 
       </div> {% endcomment %}
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5" style="margin-left:5%;">
       <h2 >{{ object.title }}</h2>
       {{ object.composer }} 
         <small class="text text-muted">{{ object.featuring}}</small><br>

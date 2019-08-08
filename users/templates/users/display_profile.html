@@ -7,17 +7,17 @@
 		<div class="col-md-3">
 			<img class="img-thumbnail" src="{{ user.profile.image.url }}" style="max-height: 100%;min-height:100%;min-width:100%;max-width: 100%;">
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-3 col-sm-3 col-xs-3">
 			<a href="{% url 'songs-profile'%}"style="color:grey;">@{{user.username}}</a>
 			<hr>
 			<p class="text text-muted">{{user.email }}</p>
 		</div> 
-		<div class="col-md-6" style="float: right;">
+		<div class="col-md-6 col-sm-6 col-xs-6" style="float: right;">
 			<button type="button" class="btn btn-primary " onclick="location.href='{% url 'songs-add' %}'"style="float:right;margin:5%;">Add a Song</button>
 			<button type="button" class="btn btn-success " onclick="location.href='{% url 'songs-update' %}'" style="float:right;margin:5%;">Update Profile</button>
 			<button type="button" class="btn btn-danger " onclick="location.href='{% url 'songs-password' %}'" style="float:right;margin:5%;">Change Password</button>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-6 col-sm-6 col-xs-6">
 		<h2 class="text text-capitalize text-success text-center">Total Songs : {{ size }} </h2>
 		</div>
 
@@ -26,28 +26,6 @@
 <div class="well">
 	<legend class="border-bottom mb-4">Your Songs</legend>
 		<div class="row">
-	{% comment %} {% for song in songs %}
-	<div class="well">
-		<div class="col-md-6 col-sm-6 col-xs-6 col-lg-6" >
-			<div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">{{ song.img.url }}
-			<img class="rounded img-thumbnail" src="{{ song.img.url }}" alt="{{ song.title }}"style="max-height: 100%;max-width: 100%;">	
-			</div>
-			<div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">
-				<h2><a href="{% url 'songs-details' song.id %}" style="color:black;">{{ song.title }}</a></h2>
-				{{ song.composer }} 
-				<small class="text text-muted">{{ song.featuring}}</small><br>
-				Album :
-				<small class="text-muted">{{song.album}}</small>
-			</div>
-		</div>
-			<hr>
-			<pre>{{ song.lyrics }}</pre>
-	</div>
-	{% empty %}
-	<div class="alert alert-danger">
-		<strong><h3>You Have Not Added Any Songs,Yet!</h3></strong>
-	</div>	
-	{% endfor %} {% endcomment %}
 	{% for song in songs %}
 	<div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
 		<div class="well" style="background-image:song.img.url">
@@ -57,9 +35,11 @@
 		</div>
 	</div>
 	{% empty %}
-	<div class="alert alert-danger">
-		<strong><h3>NO SUCH SONG EXIST!</h3></strong>
-		<p>None of our songs contain <strong>{{ searchterm }}</strong>.</p>
+	<div class="container col-md-3">
+		<div class=" alert alert-danger">
+			<strong><h3>You Haven't Added Any Song Yet.</h3></strong>
+			<button type="button" class="btn btn-primary" onclick="location.href='{% url 'songs-add' %}'">Add a Song</button>
+		</div>
 	</div>
 		
 	{% endfor %}
