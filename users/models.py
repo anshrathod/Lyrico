@@ -15,7 +15,7 @@ class Profile(models.Model):
     age = models.IntegerField(blank=True,null=True)
     gender = models.CharField(max_length=10)
 
-    def save(self):
+    def saave(self):
         super().save()
 
         img = Image.open(self.image.path)

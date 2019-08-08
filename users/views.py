@@ -187,7 +187,7 @@ def addprofile(request):
 		profile.age=request.POST['age']
 		profile.bio=request.POST['bio']
 		profile.image=request.FILES['pic']
-		profile.save()
+		profile.saave()
 	else:
 		return render(request,'users/addprofile.html')
 	return render(request,'songs/base.html')
@@ -237,7 +237,7 @@ def update(request):
 				userprofile.bio=bio
 				userprofile.image=pic
 				userprofile.save()
-				profile.save()
+				profile.saave()
 				if a>1:
 					messages.success(request, 'Your Account has been updated!')
 			except:
