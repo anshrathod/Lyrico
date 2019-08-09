@@ -1,6 +1,7 @@
 {% extends "songs/base.html" %}
 {% block body %}
-<div class="container" style="padding: 5% 25% 0% 25%">
+<div class="col-md-3"></div>
+<div class="col-md-6 col-sm-12 col-xs-12">
     <div class="well" >
         <form action='' method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -16,7 +17,7 @@
 
             <div class="form-group">
                 <label>Lyrics</label>
-                <textarea class="form-control" id="lyrics" name="lyrics" aria-describedby="lyrics" required>{{ object.lyrics }}</textarea>
+                <textarea class="form-control" id="lyrics" name="lyrics" aria-describedby="lyrics" rows=11 required>{{ object.lyrics }}</textarea>
             </div>
 
             <div class="form-group">
@@ -27,10 +28,10 @@
             <div class="form-group">
                 <label>Song Cover</label>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
                         <img class="img-thumbnail" src="{{ object.img.url }}">
                         </div>
-                    <div class="col-md-6"><br><br><br>
+                    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6"><br><br><br>
                         <input type="file" class="form-control" id="image" name="image" aria-describedby="image" value="{{object.img.url}}">
                     </div>
                 </div>

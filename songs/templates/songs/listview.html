@@ -86,35 +86,35 @@
 	<br><br><br>
   <div class="well">
     <div class="row" style="padding:2%;">
-      <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1 text text-right"><h4>No.</h4></div>
-      <div class="col-md-2 col-sm-2 col-xs-2 col-lg-2 text text-left"><h4>Song Title</h4></div>
-      <div class="col-md-2 col-sm-2 col-xs-2 col-lg-2 text text-right"><h4>Composer</h4> </div>
-      <div class="col-md-2 col-sm-2 col-xs-2 col-lg-2 text text-left"><h4>Other Artists</h4></div>
-      <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1 text text-right"><h4>Genre</h4></div>
-      <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3 text text-left"><h4>Youtube link </h4></div>
+      <div class="col-md-1 col-sm-4 col-xs-4 col-lg-1 text text-center"><h4>No.</h4></div>
+      <div class="col-md-2 col-sm-4 col-xs-4 col-lg-2 text text-center"><h4>Song Title</h4></div>
+      <div class="col-md-2 col-sm-4 col-xs-4 col-lg-2 text text-center"><h4>Composer</h4> </div>
+      <div class="col-md-2 col-sm-4 col-xs-4 col-lg-2 text text-center"><h4>Other Artists</h4></div>
+      <div class="col-md-1 col-sm-2 col-xs-2 col-lg-1 text text-center"><h4>Genre</h4></div>
+      <div class="col-md-3 col-sm-6 col-xs-6 col-lg-3 text text-center"><h4>Youtube link </h4></div>
     </div>
     <hr>
     <div class="list">
       {% for song,range in songs %}
         <div class="row" style="padding : 2%;">
-          <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1 text text-right">
+          <div class="col-md-1 col-sm-4 col-xs-4 col-lg-1 text text-center">
             <span class="id">{{range }}</span>
           </div>
-          <div class="col-md-2 col-sm-2 col-xs-2 col-lg-2 text text-left " >
+          <div class="col-md-2 col-sm-4 col-xs-4 col-lg-2 text text-center " >
             <a href="{% url 'songs-details' song.id %}">
               <span class="title text text-muted" style="font-size:125%;color:blck;">{{ song.title }}</span>
             </a>
           </div>
-          <div class="col-md-2 col-sm-2 col-xs-2 col-lg-2 text text-right">
+          <div class="col-md-2 col-sm-4 col-xs-4 col-lg-2 text text-center">
             <span class="composer">{{ song.composer }}</span> 
           </div>
-          <div class="col-md-2 col-sm-2 col-xs-2 col-lg-2 text text-left featuring">
+          <div class="col-md-2 col-sm-4 col-xs-4 col-lg-2 text text-center featuring">
             <p class="featuring mr-2">{{ song.featuring }}</p>
           </div>
-          <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1 text text-right">
+          <div class="col-md-1 col-sm-2 col-xs-2 col-lg-1 text text-center">
             <span class="genre">{{ song.genre }}</span> 
           </div>
-          <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3 text text-left">
+          <div class="col-md-3 col-sm-6 col-xs-6 col-lg-3 text text-center">
             <a class='ytlink text text-muted' href="{{ song.ytlink }}" >{{ song.ytlink }}</a> 
           </div>    
         </div>
@@ -166,7 +166,7 @@
                 <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
                     <a href="#" class="fa fa-youtube"></a>
                 </div>
-              <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6 text-center">
+              <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6  text-center">
                 © 2019 Copyright:
                 <a href="">lyrico.com</a>  
               </div>

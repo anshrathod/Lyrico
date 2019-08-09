@@ -109,7 +109,6 @@ def valid_pass(password):
 			for i in password:
 				if i in ['0','1','2','3','4','5','6','7','8','9']:
 					a+=1
-				print(a)
 			if a>0:
 				if password in passlist:
 					return 'Your Password is too Common...'
@@ -177,9 +176,7 @@ def addprofile(request):
 	
 	if request.method =="POST":
 		username=request.POST.get('username')
-		print(username)
-		users = User.objects.filter(username=username)
-		user = users[0] 
+		user = User.objects.filter(username=username).first()
 		profile=Profile.objects.get(user=user)
 		profile.fname=request.POST['fname']
 		profile.lname=request.POST['lname']
@@ -187,7 +184,7 @@ def addprofile(request):
 		profile.age=request.POST['age']
 		profile.bio=request.POST['bio']
 		profile.image=request.FILES['pic']
-		profile.saave()
+		profile.save()
 	else:
 		return render(request,'users/addprofile.html')
 	return render(request,'songs/base.html')
@@ -198,52 +195,47 @@ def update(request):
 		a=0
 		userprofile = Profile.objects.get(user=profile)
 		if request.method == 'POST':
-			print('tp')
-			try:
-				if request.POST['fname']!=profile.first_name:
-					fname = request.POST['fname']
-					a+=1
-				else:
-					fname=profile.first_name
-				if request.POST['lname']!=profile.last_name:
-					lname = request.POST['lname']
-					a+=1
-				else:
-					lname=profile.last_name
-				if request.POST['gender']!=userprofile.gender:
-					gender = request.POST['gender']
-					a+=1
-				else:
-					gender=userprofile.gender
-				if request.POST['age']!=userprofile.age:
-					age = request.POST['age']
-					a+=1
-				else:
-					age=userprofile.age
-				if request.POST['bio']!=userprofile.bio:
-					bio = request.POST['bio']
-					a+=1
-				else:
-					bio=userprofile.bio
-				if request.FILES['pic']!=userprofile.image:
-					pic = request.FILES['pic']
-					a+=1
-				else:
-					pic=userprofile.image
-				profile.first_name = fname
-				profile.last_name = lname
-				userprofile.gender=gender
-				userprofile.age=age
-				userprofile.bio=bio
-				userprofile.image=pic
-				userprofile.save()
-				profile.saave()
-				if a>1:
-					messages.success(request, 'Your Account has been updated!')
-			except:
-				messages.warning(request,'An Error Occured while updating your profile.')
-			finally:
-				return redirect('songs-profile')
+			if request.POST['fname']!=profile.first_name:
+				fname = request.POST['fname']
+				a+=1
+			else:
+				fname=profile.first_name
+			if request.POST['lname']!=profile.last_name:
+				lname = request.POST['lname']
+				a+=1
+			else:
+				lname=profile.last_name
+			if request.POST['gender']!=userprofile.gender:
+				gender = request.POST['gender']
+				a+=1
+			else:
+				gender=userprofile.gender
+			if request.POST['age']!=userprofile.age:
+				age = request.POST['age']
+				a+=1
+			else:
+				age=userprofile.age
+			if request.POST['bio']!=userprofile.bio:
+				bio = request.POST['bio']
+				a+=1
+			else:
+				bio=userprofile.bio
+			if request.FILES['pic']!=userprofile.image:
+				pic = request.FILES['pic']
+				a+=1
+			else:
+				pic=userprofile.image
+			profile.first_name = fname
+			profile.last_name = lname
+			userprofile.gender=gender
+			userprofile.age=age
+			userprofile.bio=bio
+			userprofile.image=pic
+			userprofile.save()
+			profile.save()
+			if a>1:
+				messages.success(request, 'Your Account has been updated!')
+			return redirect('songs-profile')
 		songs = Song.objects.all()
 		username = profile.username
 		for song in songs:

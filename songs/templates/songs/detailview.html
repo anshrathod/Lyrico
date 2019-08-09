@@ -1,9 +1,9 @@
 {% extends "songs/base.html" %}
 {% block body %}
 <div class = "well">
-  <div class="col-md-6 ">
-    <div class="col-md-6">
-      <img class="img-thumbnail" src="{{ song.img.url }}" style="max-width:110%;max-height:110%"><br><br>
+  <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6 ">
+    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+      <img class="img-rounded img-thumbnail" src="{{ song.img.url }}" style="max-width:110%;max-height:110%"><br><br>
       {% comment %} <div class="col-md-12">
         <audio controls style="padding-right:0%">{{song.audio.url}}
           <source src="{{ song.audio.url }}" type="audio/mpeg">
@@ -23,13 +23,13 @@
         </audio> 
       </div>
       {% if song.composer == user.username %}
-        <div class="col-md-12">
-            <div class="col-md-6"> <a class=" btn btn-warning btn-block mt-1 mb-1" href="{% url 'songs-updatesong' object.id %}">Update</a></div>
-		      	<div class="col-md-6"> <a class="btn btn-danger btn-block  mt-1 mb-1" href="{% url 'songs-delete' object.id%}">Delete</a> </div>
+        <div class="col-md-12" style="margin-top:2%">
+            <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6" style="margin-bottom:3%"> <a class=" btn btn-warning btn-block mt-1 mb-1" href="{% url 'songs-updatesong' object.id %}">Update</a></div>
+		      	<div class="col-md-6 col-sm-6 col-xs-6 col-lg-6" style="margin-bottom:3%"> <a class="btn btn-danger btn-block  mt-1 mb-1" href="{% url 'songs-delete' object.id%}">Delete</a> </div>
 	  		</div>
 		  {% endif %}
   </div>
-  <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">
+  <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6 " style="margin-bottom:2%">
       <div class="embed-responsive embed-responsive-16by9"> 
         <iframe class="embed-responsive-item" src="{{ object.link }}" allowfullscreen></iframe>
       </div>
@@ -55,33 +55,34 @@
   margin-bottom:0%;
 }
 </style>
-<footer class="foooter" >
-        <div class="well">
-            <div class="row">
-                <div class="col-md-1">
-                  <a href="#" class="fa fa-facebook"></a>
-                </div>
-                <div class="col-md-1">
-                  <a href="#" class="fa fa-twitter"></a>
-                </div>
-                <div class="col-md-1">
-                  <a href="#" class="fa fa-instagram"></a>
-                </div>
-                <div class="col-md-1">
-                    <a href="#" class="fa fa-google"></a>
-                </div>
-                <div class="col-md-1">
-                    <a href="#" class="fa fa-linkedin"></a>
-                </div>
-                <div class="col-md-1">
-                    <a href="#" class="fa fa-youtube"></a>
-                </div>
-              <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6 text-center">
-                © 2019 Copyright:
-                <a href="">lyrico.com</a>  
-              </div>
-            </div>
+<footer class="foooter">
+<br>  
+  <div class="well">
+    <div class="row">
+        <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
+          <a href="#" class="fa fa-facebook"></a>
         </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
+          <a href="#" class="fa fa-twitter"></a>
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
+          <a href="#" class="fa fa-instagram"></a>
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
+            <a href="#" class="fa fa-google"></a>
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
+            <a href="#" class="fa fa-linkedin"></a>
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
+            <a href="#" class="fa fa-youtube"></a>
+        </div>
+      <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6  text-center">
+        © 2019 Copyright:
+        <a href="">lyrico.com</a>  
+      </div>
+    </div>
+  </div>
 </footer>
 
 {% endblock %}
