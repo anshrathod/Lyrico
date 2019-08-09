@@ -13,16 +13,16 @@
 			<p class="text text-muted">{{user.email }}</p>
 		</div> 
 		<div class="col-md-6 col-sm-12 col-xs-12 col-lg-6 " style="float: right;">
-			<button type="button" class="col-md-4 col-sm-6 col-xs-12 col-lg-4 btn btn-primary " onclick="location.href='{% url 'songs-add' %}'"style="float:right;margin:2%;margin-left:3%">Add a Song</button>
-			<button type="button" class="col-md-4 col-sm-6 col-xs-12 col-lg-4 btn btn-success " onclick="location.href='{% url 'songs-update' %}'" style="float:right;margin:2%;margin-left:3%">Update Profile</button>
-			<button type="button" class="col-md-4 col-sm-6 col-xs-12 col-lg-4 btn btn-danger " onclick="location.href='{% url 'songs-password' %}'" style="float:right;margin:2%;margin-left:3%">Change Password</button>
+			<button type="button" class="col-md-4 col-sm-6 col-xs-12 col-lg-3 btn btn-primary " onclick="location.href='{% url 'songs-add' %}'"style="float:right;margin:2%;margin-left:4%">Add a Song</button>
+			<button type="button" class="col-md-4 col-sm-6 col-xs-12 col-lg-3 btn btn-success " onclick="location.href='{% url 'songs-update' %}'" style="float:right;margin:2%;margin-left:4%">Update Profile</button>
+			<button type="button" class="col-md-4 col-sm-6 col-xs-12 col-lg-3 btn btn-danger " onclick="location.href='{% url 'songs-password' %}'" style="float:right;margin:2%;margin-left:4%">Change Password</button>
 		</div>
 		<div class="col-md-6 col-sm-12 col-xs-12 col-lg-6 ">
 		<h2 class="text text-capitalize text-success text-center">Total Songs : {{ size }} </h2>
 		</div>
 
 	</div>
-</div>
+</div><br>
 <div class="well">
 	<legend class="border-bottom mb-4">Your Songs</legend>
 		<div class="row">
