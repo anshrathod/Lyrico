@@ -1,14 +1,10 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
-from django.views.generic import (
-    CreateView, DeleteView, DetailView, ListView, UpdateView)
 
 from songs.models import Song
-from users.models import Profile
 
 
 def home(request):

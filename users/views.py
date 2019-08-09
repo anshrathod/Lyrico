@@ -10,9 +10,6 @@ from django.urls import reverse
 from songs.models import Song
 
 from .models import Profile
-from .signup import ProfileUpdateForm, UserRegisterForm, UserUpdateForm
-from PIL import Image
-
 
 def login_user(request):
 	if request.method == "POST":
@@ -76,8 +73,8 @@ def register(request):
 						user = User(first_name = fname,last_name = lname,username=username,email=email,password=password1)
 						user.save()
 						messages.success(request, ('Account has been created for {}! Please Fill the details to build up your Profile.'.format(username)))
-						profile=Profile(user = user)
-						profile.save()
+						# profile=Profile(user = user)
+						# profile.save()
 						login(request,user)
 						return redirect('songs-addprofile')
 					else:
