@@ -74,7 +74,7 @@ def signup(request):
 		return render(request,'users/register.html',{})
 	else:
 		user = UserRegisterForm()
-	return render(request,'users/signup.html',{'form':user})
+	return render(request,'users/register.html',{})
 
 def valid_email(mail):
     domains = ['somaiya.edu',
