@@ -13,7 +13,7 @@ class Song(models.Model):
     ytlink = models.CharField(max_length=1000 ,default='')
     genre = models.CharField(max_length=100,blank=True)
     audio = models.FileField(upload_to='audio/',default='')
-    
+
     def __str__(self):
         return self.title
 
@@ -27,5 +27,5 @@ class Song(models.Model):
 
         if image.height > 300 or image.width > 300:
             output_size = (300, 300)
-            image.thumbnail(output_size)
+            image = image.resize(output_size)
             image.save(self.img.path)
