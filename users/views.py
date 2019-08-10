@@ -28,7 +28,7 @@ def login_user(request):
 			messages.warning(request,'The account details entered were wrong.')
 			return render(request, 'users/login.html')
 	return render(request, 'users/login.html')
-	
+
 
 def signup(request):
 	if request.method=='POST':
@@ -45,7 +45,7 @@ def signup(request):
 				login(request,useracc)
 			else:
 				messages.warning(request,'Your account couldn\'t be created...')
-				return redirect('songs-signup') 
+				return redirect('songs-signup')
 			return redirect('songs-addprofile')
 	else:
 		user = UserRegisterForm()
@@ -71,10 +71,14 @@ def register(request):
 				if passval == 'True':
 					if valid_email(email):
 						user = User(first_name = fname,last_name = lname,username=username,email=email,password=password1)
+						print(user)
 						user.save()
-						messages.success(request, ('Account has been created for {}! Please Fill the details to build up your Profile.'.format(username)))
-						profile=Profile(user = user)
+						profile=Profile(user = user,age=0)
+						print(profile)
+						print("Age :",profile.age)
 						profile.save()
+						print("Age :",profile.age)
+						messages.success(request, ('Account has been created for {}! Please Fill the details to build up your Profile.'.format(username)))
 						login(request,user)
 						return redirect('songs-addprofile')
 					else:
@@ -82,12 +86,13 @@ def register(request):
 						return render(request,'users/signup.html',context)
 				else:
 					messages.warning(request,passval)
-					return render(request,'users/signup.html',context) 
+					return render(request,'users/signup.html',context)
 			else:
 				messages.warning(request,'Both The Passwords Entered Didn\'t Match.')
 				return render(request,'users/signup.html',context)
 	except Exception as e:
-		messages.error(request,str(e))
+	    messages.warning(request,e)
+	    print(profile.age)
 	return render(request,'users/signup.html',{})
 
 def valid_email(mail):
@@ -141,14 +146,14 @@ def addsong(request):
 		img=request.FILES['img']
 		link=request.POST['link']
 		genre=request.POST['genre']
-		genre = genre.upper() 
+		genre = genre.upper()
 		audio=request.FILES['audio']
 		ytlink=link
 		link='https://www.youtube.com/embed/'+ link[link.index('=')+1:]+'?rel=0'
 		song = Song(title=title,lyrics=lyrics,composer=composer,featuring=featuring,album=album,img=img,link=link,ytlink=ytlink,audio=audio,genre=genre)
 		song.save()
 
-		return redirect('songs-profile')	
+		return redirect('songs-profile')
 	else:
 		return render(request,'songs/addsong.html')
 
@@ -166,11 +171,11 @@ def profile(request):
 		if song.composer == username or song.featuring == username:
 			mysongs.append(song)
 	size = len(mysongs)
-	context = {'size': size,'songs':mysongs} 
+	context = {'size': size,'songs':mysongs}
 	return render(request,'users/display_profile.html',context)
 
 def addprofile(request):
-	
+
 	if request.method =="POST":
 		username=request.POST.get('username')
 		user = User.objects.filter(username=username).first()
@@ -181,7 +186,7 @@ def addprofile(request):
 		profile.age=request.POST['age']
 		profile.bio=request.POST['bio']
 		profile.image=request.FILES['pic']
-		profile.save()
+		profile.saave()
 	else:
 		return render(request,'users/addprofile.html')
 	return render(request,'songs/base.html')
@@ -228,8 +233,9 @@ def update(request):
 			userprofile.age=age
 			userprofile.bio=bio
 			userprofile.image=pic
-			userprofile.save()
+			userprofile.saave()
 			profile.save()
+			print('tp2')
 			if a>1:
 				messages.success(request, 'Your Account has been updated!')
 			return redirect('songs-profile')
