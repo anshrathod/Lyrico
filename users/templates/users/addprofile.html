@@ -1,4 +1,7 @@
 {% extends "songs/base.html" %}
+{% block title %}
+LYRICO -Add Profile
+{% endblock title %}
 {% load crispy_forms_tags %}
 {% block body %}
 <div class="row">
@@ -40,18 +43,18 @@
             </div>
             <div class="col-md-12  col-sm-12">
                 <br>
-                <textarea type="text" class="form-control mr-sm-3" name="bio" placeholder="Your Bio" aria-label="Bio" rows="3"></textarea>
+                <textarea type="text" class="form-control mr-sm-3" name="bio" placeholder="Your Bio" aria-label="Bio" rows="3">{{ user.profile.bio }}</textarea>
             </div>
             <div class="col-md-12  col-sm-12">
             <br>
-                <input type="text" class="form-control mr-sm-3" name="gender" placeholder="Gender" value="" aria-label="Gender" >
+                <input type="text" class="form-control mr-sm-3" name="gender" placeholder="Gender" value="{{ user.profile.gender }}" aria-label="Gender" >
             </div>
             <div class="col-md-12  col-sm-12"><br>
-            <input class="form-control mr-sm-3" type="integer" name="age" placeholder="Age" value=""aria-label="Age">
+            <input class="form-control mr-sm-3" type="integer" name="age" placeholder="Age" value="{{ user.profile.age }}" aria-label="Age">
             </div> 
             <div class="col-md-12 col-sm-12">
             <br>
-            <button type="submit" class="btn btn-success"onclick="location.href='{% url 'songs-addprofile' %}'" >Add to Profile</button>
+            <button type="submit" class="btn btn-success" >Add to Profile</button>
            </div>
         </form>
     </div>

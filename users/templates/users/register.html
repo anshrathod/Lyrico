@@ -1,0 +1,30 @@
+{% extends "songs/base.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="col-md-3"></div>
+<div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+	<div class="well">
+		<div class="row" >
+			<div class="col-md-12" style="text-align:left; margi-left:20%;">
+				<div class="content-section">
+					<form method="POST">
+						{% csrf_token %}
+						<fieldset class="form-group">
+							<legend><h3>Join Today</h3></legend>
+							{{form|crispy}}
+						</fieldset>
+						<div class="form-group" style="padding-right:65%">
+							<button class="btn btn-success btn-block" type="submit">Sign Up</button>
+						</div>
+					</form>
+					<div class="border-top pt-3">
+						<small class="text-muted">
+							Already have an account?<a href="{% url 'songs-login' %}" class="ml-2">Sign In</a>
+						</small>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock  %}

@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.contrib.auth import update_session_auth_hash
 from django.urls import reverse
+from .forms import UserRegisterForm
 
 from songs.models import Song
 
@@ -32,68 +33,48 @@ def login_user(request):
 
 def signup(request):
 	if request.method=='POST':
-		user = UserRegisterForm(request.POST)
-		if user.is_valid():
-			username = user.cleaned_data.get('username')
-			mail=user.cleaned_data.get('email')
-			if valid_email(mail):
-				user.save()
-				messages.success(request, ('Account has been created for {}! Please Fill the details to build up your Profile.'.format(username)))
-				useracc=User.objects.get(username=username)
-				profile=Profile(user = useracc)
-				profile.save()
-				login(request,useracc)
-			else:
-				messages.warning(request,'Your account couldn\'t be created...')
-				return redirect('songs-signup')
-			return redirect('songs-addprofile')
-	else:
-		user = UserRegisterForm()
-	return render(request,'users/register.html',{'form':user})
-
-def register(request):
-	try:
-		if request.method == 'POST':
-			password1 = request.POST['password1']
-			password2 = request.POST['password2']
-			fname = request.POST['fname']
-			lname = request.POST['lname']
-			username = request.POST['username']
-			email = request.POST['email']
-			context={
-						'fname':fname,
-						'lname':lname,
-						'username':username,
-						'email':email,
-					}
-			if password1 == password2:
-				passval = valid_pass(password1)
-				if passval == 'True':
-					if valid_email(email):
-						user = User(first_name = fname,last_name = lname,username=username,email=email,password=password1)
-						print(user)
-						user.save()
-						profile=Profile(user = user,age=0)
-						print(profile)
-						print("Age :",profile.age)
-						profile.save()
-						print("Age :",profile.age)
-						messages.success(request, ('Account has been created for {}! Please Fill the details to build up your Profile.'.format(username)))
-						login(request,user)
-						return redirect('songs-addprofile')
+		try:
+			user = UserRegisterForm(request.POST)
+			if user.is_valid():
+				password1 = user.cleaned_data.get('password1')
+				password2 = user.cleaned_data.get('password2')
+				username = user.cleaned_data.get('username')
+				email=user.cleaned_data.get('email')
+				fname =user.cleaned_data.get('fname')
+				lname =user.cleaned_data.get('lname')
+				context={
+							'fname':fname,
+							'lname':lname,
+							'username':username,
+							'email':email,
+						}
+				if password1 == password2:
+					passval = valid_pass(password1)
+					if passval == 'True':
+						if valid_email(email):
+							user.save()
+							useracc=User.objects.get(username=username)
+							profile=Profile(user = useracc,age=0)
+							profile.save()
+							messages.success(request, ('Account has been created for {}! Please Fill the details to build up your Profile.'.format(username)))
+							login(request,useracc)
+							return redirect('songs-addprofile')
+						else:
+							messages.warning(request,'Your account couldn\'t be created...Enter Valid Email-id.')
+							return render(request,'users/signup.html',context)
 					else:
-						messages.warning(request,'Your account couldn\'t be created...Enter Valid Email-id.')
+						messages.warning(request,passval)
 						return render(request,'users/signup.html',context)
 				else:
-					messages.warning(request,passval)
+					messages.warning(request,'Both The Passwords Entered Didn\'t Match.')
 					return render(request,'users/signup.html',context)
-			else:
-				messages.warning(request,'Both The Passwords Entered Didn\'t Match.')
-				return render(request,'users/signup.html',context)
-	except Exception as e:
-	    messages.warning(request,e)
-	    print(profile.age)
-	return render(request,'users/signup.html',{})
+		except Exception as e:
+			messages.warning(request,e)
+			print(profile.age)
+		return render(request,'users/register.html',{})
+	else:
+		user = UserRegisterForm()
+	return render(request,'users/signup.html',{'form':user})
 
 def valid_email(mail):
     domains = ['somaiya.edu',
@@ -175,17 +156,21 @@ def profile(request):
 	return render(request,'users/display_profile.html',context)
 
 def addprofile(request):
-
+	if request.user.profile.bio :
+		messages.warning(request,'Your Profile can be added only Once.You can update your profile.To update your Profile Go to /profile/update')
+		return redirect('songs-home')
 	if request.method =="POST":
+		print("heyy")
 		username=request.POST.get('username')
 		user = User.objects.filter(username=username).first()
 		profile=Profile.objects.get(user=user)
-		profile.fname=request.POST['fname']
-		profile.lname=request.POST['lname']
+		user.first_name=request.POST['fname']
+		user.last_name=request.POST['lname']
 		profile.gender=request.POST['gender']
 		profile.age=request.POST['age']
 		profile.bio=request.POST['bio']
 		profile.image=request.FILES['pic']
+		user.save()
 		profile.saave()
 	else:
 		return render(request,'users/addprofile.html')
