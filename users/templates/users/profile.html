@@ -1,4 +1,7 @@
 {% extends "songs/base.html" %}
+{% block title %}
+LYRICO - My profile
+{% endblock %}
 {% load crispy_forms_tags %}
 {% block body %}
 <style>
@@ -17,15 +20,15 @@
       </fieldset>
       <div class="col-md-12  col-sm-12">
           <div class="col-lg-12 col-md-12 col-sm-12"><img class="img-thumbnail" src="{{ user.profile.image.url }}" style="max-height: 100%;max-width: 100%">
-          </div><div class="col-md-12"><br><input class="form-control" type="file" placeholder="Profile-Pic" name="pic" aria-label="Profile_Pic">
+          </div><div class="col-md-12"><br><input class="form-control" type="file" placeholder="Profile-Pic" name="pic" aria-label="Profile_Pic" required>
           </div>
       </div >
       <div class="col-md-12  col-sm-12"></div>
       <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6 "><br>
-          <input class="form-control mr-sm-3" type="text" name="fname" placeholder="First name" value="{{user.first_name}}" aria-label="Fname">
+          <input class="form-control mr-sm-3" type="text" name="fname" placeholder="First name" value="{{user.first_name}}" aria-label="Fname"required>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6 "><br>
-          <input class="form-control mr-sm-3" type="text" name="lname" placeholder="Last name" value="{{user.last_name}}" aria-label="Lname"><br>
+          <input class="form-control mr-sm-3" type="text" name="lname" placeholder="Last name" value="{{user.last_name}}" aria-label="Lname" required><br>
       </div>
       <div class="col-md-12 col-sm-12">
           <input class="form-control mr-sm-3" type="text" name="username" placeholder="Username" value="{{user.username}}"aria-label="Username" disabled>
@@ -36,14 +39,14 @@
       </div>
       <div class="col-md-12  col-sm-12">
           <br>
-          <textarea type="text" class="form-control mr-sm-3" name="bio" placeholder="Your Bio" aria-label="Bio" rows="3">{{ user.profile.bio }}</textarea>
+          <textarea type="text" class="form-control mr-sm-3" name="bio" placeholder="Your Bio" aria-label="Bio" rows="3" required>{{ user.profile.bio }}</textarea>
       </div>
       <div class="col-md-12  col-sm-12">
       <br>
-          <input type="text" class="form-control mr-sm-3" name="gender" placeholder="Gender" value="{{ user.profile.gender }}" aria-label="Gender" >
+          <input type="text" class="form-control mr-sm-3" name="gender" placeholder="Gender" value="{{ user.profile.gender }}" aria-label="Gender" required>
       </div>
       <div class="col-md-12  col-sm-12"><br>
-      <input class="form-control mr-sm-3" type="integer" name="age" placeholder="Age" value="{{ user.profile.age }}"aria-label="Age">
+      <input class="form-control mr-sm-3" type="integer" name="age" placeholder="Age" value="{{ user.profile.age }}"aria-label="Age" required>
       </div> 
       <div class="col-md-12">
         <br>

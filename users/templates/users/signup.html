@@ -1,4 +1,7 @@
 {% extends "songs/base.html" %}
+{% block title %}
+LYRICO - Sign Up
+{% endblock %}
 {% block body %}
 <style>
 .well{
@@ -17,28 +20,28 @@
 						{% csrf_token %}
 						<fieldset class="form-group">
 							<legend><h3>Join Today</h3></legend>
-                            <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6 ">
-                                <input class="form-control mr-sm-3" type="text" name="fname" placeholder="First name" value="{{ fname }}" aria-label="Fname"><br>
-                            </div>
-                            <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6 ">
-                                <input class="form-control mr-sm-3" type="text" name="lname" placeholder="Last name" value="{{ lname }}" aria-label="Lname"><br>
-                            </div>
-                            <div class="col-md-12 col-sm-12">
-                                <input class="form-control mr-sm-3" type="text" name="username" placeholder="Username" value="{{ username }}"aria-label="Username" >
-                                <small class="text text-muted" style="margin:5%;padding:2%"><li>Your username can contain special characters like _ , - , . , @.</li></small>
-                            </div>
-                            <div class="col-md-12  col-sm-12">
-                                <input class="form-control mr-sm-3" type="email" name="email" placeholder="Email-id" value="{{ email }}"aria-label="Email" required>
-                            </div>
-                            <div class="col-md-12  col-sm-12">
-                            <br>
-                                <input type="password" class="form-control mr-sm-3" name="password1" placeholder="Password" value="" aria-label="Password" >
-                                <small class="text text-muted" style="margin:5%;padding:2%"><li>Your password should not be common</li><li>Your password should contain atleast 8 characters</li><li>Your password must contain @ and numbers</li></small>
-                            </div>
-                            <div class="col-md-12  col-sm-12">
-                                <input type="password" class="form-control mr-sm-3" name="password2" placeholder="Confirm Password" value="" aria-label="Password" >
-                            </div>
-                            <br>
+                <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6 ">
+                    <input class="form-control mr-sm-3" type="text" name="fname" placeholder="First name" value="{{ fname }}" aria-label="Fname" required><br>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6 ">
+                    <input class="form-control mr-sm-3" type="text" name="lname" placeholder="Last name" value="{{ lname }}" aria-label="Lname"required><br>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <input class="form-control mr-sm-3" type="text" name="username" placeholder="Username" value="{{ username }}"aria-label="Username" required>
+                    <small class="text text-muted" style="margin:5%;padding:2%"><li>Your username can contain special characters like _ , - , . , @.</li></small>
+                </div>
+                <div class="col-md-12  col-sm-12">
+                    <input class="form-control mr-sm-3" type="email" name="email" placeholder="Email-id" value="{{ email }}"aria-label="Email" required>
+                </div>
+                <div class="col-md-12  col-sm-12">
+                <br>
+                    <input type="password" class="form-control mr-sm-3" name="password1" placeholder="Password" value="" aria-label="Password" required>
+                    <small class="text text-muted" style="margin:5%;padding:2%"><li>Your password should not be common</li><li>Your password should contain atleast 8 characters</li><li>Your password must contain @ and numbers</li></small>
+                </div>
+                <div class="col-md-12  col-sm-12">
+                    <input type="password" class="form-control mr-sm-3" name="password2" placeholder="Confirm Password" value="" aria-label="Password" required>
+                </div>
+                <br>
 						</fieldset>
 						<div class="form-group" style="padding:2% 3% 0 3%">
 							<button class="btn btn-success btn-block" type="submit">Sign Up</button>

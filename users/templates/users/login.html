@@ -1,4 +1,7 @@
 {% extends "songs/base.html" %}
+{% block title %}
+LYRICO - Login
+{% endblock %}
 {% block body %}
 <style>
 .well{
@@ -14,7 +17,7 @@
 		<div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">@</span>
-				<input type="text" class="form-control" id="username" name="username" placeholder="{{ username }}" aria-describedby="basic-addon1">
+				<input type="text" class="form-control" id="username" name="username" aria-describedby="basic-addon1" placeholder="Username">
 			</div>
 		    {% comment %} <label>Username</label>
 		    <input type="text" class="form-control" id="username" name="username" aria-describedby="username" placeholder="Enter username">  {% endcomment %}
@@ -23,7 +26,7 @@
 	        {% comment %} <label >Password</label> {% endcomment %}
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">>></span>
-				<input type="password" class="form-control" id="password" name="password" aria-describedby="password" placeholder="Enter password">
+				<input type="password" class="form-control" id="password" name="password" aria-describedby="password" placeholder="Password">
 	    	</div>
 		</div>
 		<div class="row">

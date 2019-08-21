@@ -71,10 +71,10 @@ def signup(request):
 		except Exception as e:
 			messages.warning(request,e)
 			print(profile.age)
-		return render(request,'users/register.html',{})
+		return render(request,'users/signup.html',{})
 	else:
 		user = UserRegisterForm()
-	return render(request,'users/register.html',{})
+	return render(request,'users/signup.html',{})
 
 def valid_email(mail):
     domains = ['somaiya.edu',
