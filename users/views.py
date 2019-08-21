@@ -142,7 +142,7 @@ def logout_user(request):
 	logout(request)
 	messages.warning(request,'You have successfully logged out.')
 	return redirect('songs-home')
-
+	
 @login_required
 def profile(request):
 	mysongs = list()
@@ -152,7 +152,7 @@ def profile(request):
 		if song.composer == username or song.featuring == username:
 			mysongs.append(song)
 	size = len(mysongs)
-	context = {'size': size,'songs':mysongs}
+	context = {'size': size,'songs':mysongs,'thisuser':username}
 	return render(request,'users/display_profile.html',context)
 
 def addprofile(request):
@@ -169,7 +169,8 @@ def addprofile(request):
 		profile.gender=request.POST['gender']
 		profile.age=request.POST['age']
 		profile.bio=request.POST['bio']
-		profile.image=request.FILES['pic']
+		if request.FILES['pic']:
+			profile.image=request.FILES['pic']
 		user.save()
 		profile.saave()
 	else:

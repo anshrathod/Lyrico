@@ -64,71 +64,73 @@
         </div>
     {% endfor %}
 {% endif %}
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
-<div id="songs">
-	<div class="well col-md-5"style="float: right;">
-    <div class="form-group">
-      <div class="input-group">
-      <span class="input-group-addon glyphicon glyphicon-search"></span>
-        <input class="search col-md-12 form-control " style="margin-top:0.5%" placeholder="Search"/>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+  <style>
+    .well{
+        border-radius:10px;
+        border-color:grey;
+        margin:2%;
+        margin-bottom:0%;
+    }
+  </style>
+  <div class="row" id="songs">
+    <div class="well col-md-5 col-xs-8 col-sm-8 col-lg-5"style="float: right;">
+      <div class="form-group">
+        <div class="input-group">
+        <span class="input-group-addon glyphicon glyphicon-search"></span>
+          <input class="search col-md-12 form-control " style="margin-top:0.5%" placeholder="Search"/>
+        </div>
+      </div>
+      <div class="row">
+        <p class="col-md-3 col-sm-3 col-xs-6 col-lg-3" style="margin-top:2%">Sort By:</p>
+        <div class="col-md-3 col-sm-2 col-xs-12 col-lg-3"><button class="sort btn btn-primary btn-block" style="margin-top:1%" data-sort="title">Title</button></div>
+        <div class="col-md-3 col-sm-2 col-xs-12 col-lg-3"><button class="sort btn btn-primary btn-block" style="margin-top:1%" data-sort="composer">Composer</button></div>
+        <div class="col-md-3 col-sm-2 col-xs-12 col-lg-3"><button class="sort btn btn-primary btn-block" style="margin-top:1%" data-sort="genre">Genre</button></div>
       </div>
     </div>
-    <div class="row">
-      <p class="col-md-3 col-sm-3" style="margin-top:2%">Sort By:</p>
-      <div class="col-md-3 col-sm-2"><button class="sort btn btn-primary btn-block" style="margin-top:1%" data-sort="title">Title</button></div>
-      <div class="col-md-3 col-sm-2"><button class="sort btn btn-primary btn-block" style="margin-top:1%" data-sort="composer">Composer</button></div>
-      <div class="col-md-3 col-sm-2"><button class="sort btn btn-primary btn-block" style="margin-top:1%" data-sort="genre">Genre</button></div>
+    <div class="well col-md-12 col-xs-12 col-sm-12 col-lg-12"style="margin-top:2%">
+      <div class="row" style="padding:2%;">
+        <div class="col-md-1 col-sm-6 col-xs-6 col-lg-1 text text-center"><h4>Cover</h4></div>
+        <div class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center"><h4>Song Title</h4></div>
+        <div class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center"><h4>Composer</h4> </div>
+        <div class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center"><h4>Other Artists</h4></div>
+        <div class="col-md-1 col-sm-6 col-xs-6 col-lg-1 text text-center"><h4>Genre</h4></div>
+        <div class="col-md-4 col-sm-6 col-xs-6 col-lg-4 text text-center"><h4>Youtube link </h4></div>
+      </div>
+      <div class="list">
+        {% for song,range in songs %}
+          <div class="row" style="padding : 2%;">
+            <div class="col-md-1 col-sm-4 col-xs-4 col-lg-1 text text-center">
+              <img class="id img-rounded img-thumbnail" src="{{ song.img.url }}" style="max-width:125%;max-height:125%;">
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center" >
+              <a href="{% url 'songs-details' song.id %}">
+                <span class="title text text-muted" style="font-size:125%;color:black;">{{ song.title }}</span>
+              </a>
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center">
+              <span class="composer">{{ song.composer }}</span> 
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center featuring">
+              <p class="featuring mr-2">{{ song.featuring }}</p>
+            </div>
+            <div class="col-md-1 col-sm-6 col-xs-6 col-lg-1 text text-center">
+              <span class="genre">{{ song.genre }}</span> 
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 text text-center">
+              <a class='ytlink text text-muted' href="{{ song.ytlink }}" >{{ song.ytlink }}</a> 
+            </div>    
+          </div>
+        
+        {% empty %}
+        <div class="alert alert-danger">
+          <strong><h3>NO SUCH SONG EXIST!</h3></strong>
+          <p>None of our songs contain <strong>{{ searchterm }}</strong>.</p>
+        </div> 
+        {% endfor %}
+      </div>
     </div>
   </div>
-	<br><br><br><br><br>
-	<br><br><br>
-  <div class="well">
-    <div class="row" style="padding:2%;">
-      <div class="col-md-1 col-sm-4 col-xs-4 col-lg-1 text text-center"><h4>No.</h4></div>
-      <div class="col-md-2 col-sm-4 col-xs-4 col-lg-2 text text-center"><h4>Song Title</h4></div>
-      <div class="col-md-2 col-sm-4 col-xs-4 col-lg-2 text text-center"><h4>Composer</h4> </div>
-      <div class="col-md-2 col-sm-4 col-xs-4 col-lg-2 text text-center"><h4>Other Artists</h4></div>
-      <div class="col-md-1 col-sm-2 col-xs-2 col-lg-1 text text-center"><h4>Genre</h4></div>
-      <div class="col-md-3 col-sm-6 col-xs-6 col-lg-3 text text-center"><h4>Youtube link </h4></div>
-    </div>
-    <hr>
-    <div class="list">
-      {% for song,range in songs %}
-        <div class="row" style="padding : 2%;">
-          <div class="col-md-1 col-sm-4 col-xs-4 col-lg-1 text text-center">
-            <span class="id">{{range }}</span>
-          </div>
-          <div class="col-md-2 col-sm-4 col-xs-4 col-lg-2 text text-center " >
-            <a href="{% url 'songs-details' song.id %}">
-              <span class="title text text-muted" style="font-size:125%;color:blck;">{{ song.title }}</span>
-            </a>
-          </div>
-          <div class="col-md-2 col-sm-4 col-xs-4 col-lg-2 text text-center">
-            <span class="composer">{{ song.composer }}</span> 
-          </div>
-          <div class="col-md-2 col-sm-4 col-xs-4 col-lg-2 text text-center featuring">
-            <p class="featuring mr-2">{{ song.featuring }}</p>
-          </div>
-          <div class="col-md-1 col-sm-2 col-xs-2 col-lg-1 text text-center">
-            <span class="genre">{{ song.genre }}</span> 
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 col-lg-3 text text-center">
-            <a class='ytlink text text-muted' href="{{ song.ytlink }}" >{{ song.ytlink }}</a> 
-          </div>    
-        </div>
-       
-      {% empty %}
-      <div class="alert alert-danger">
-        <strong><h3>NO SUCH SONG EXIST!</h3></strong>
-        <p>None of our songs contain <strong>{{ searchterm }}</strong>.</p>
-      </div> 
-      {% endfor %}
-    </div>
-  </div>
-</div>
-
 </div>
 </body>
 
@@ -142,7 +144,7 @@
    margin-top:10%;
 }
 .well{
-  margin-bottom:0%;
+  margin:0%;
 }
 </style>
 <footer class="foooter" >

@@ -1,5 +1,12 @@
 {% extends "songs/base.html" %}
 {% block body %}
+<style>
+.well{
+    border-radius:10px;
+    border-color:grey;
+    margin-bottom:0%;
+}
+</style>
 <div class="col-md-3"></div>
 <div class="col-md-6 col-sm-12 col-xs-12">
     <div class="well" >
@@ -30,8 +37,8 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
                         <img class="img-thumbnail" src="{{ object.img.url }}">
-                        </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6"><br><br><br>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6"><br>
                         <input type="file" class="form-control" id="image" name="image" aria-describedby="image" value="{{object.img.url}}">
                     </div>
                 </div>
@@ -39,8 +46,8 @@
             <div class="form-group">
                 <label>Song Audio</label>
                 <div class="row">
-                    <p class="col-md-1 text text-success"><br>Current:<p>
-                    <audio controls class="col-md-11"style="padding-right:0%">{{song.audio.url}}
+                    <p class="col-xs-12 col-sm-12 col-md-2 col-lg-2 text text-success"><br>Current :<p>
+                    <audio controls class="col-xs-12 col-sm-12 col-md-10 col-lg-10"style="padding-right:0%">{{song.audio.url}}
                         <source src="{{ object.audio.url }}" type="audio/mpeg">
                     </audio>
                 </div> 
@@ -64,9 +71,6 @@
    width: 100%;
    text-align: center;
    margin-top:10%;
-}
-.well{
-  margin-bottom:0%;
 }
 </style>
 <footer class="foooter" >
