@@ -1,16 +1,18 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import (authenticate, login, logout,
+                                 update_session_auth_hash)
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
-from django.contrib.auth import update_session_auth_hash
 from django.urls import reverse
-from .forms import UserRegisterForm
+from django.utils.datastructures import MultiValueDictKeyError
 
 from songs.models import Song
 
+from .forms import UserRegisterForm
 from .models import Profile
+
 
 def login_user(request):
 	if request.method == "POST":
@@ -208,10 +210,17 @@ def update(request):
 				a+=1
 			else:
 				bio=userprofile.bio
-			if request.FILES['pic']!=userprofile.image:
-				pic = request.FILES['pic']
-				a+=1
-			else:
+			try:
+				if request.FILES['pic']:
+					pic = request.FILES['pic']
+					path = userprofile.image.path
+					import os
+					os.remove(path)
+					a+=1
+				else:
+					pic=userprofile.image
+			except MultiValueDictKeyError :
+				print("m")
 				pic=userprofile.image
 			profile.first_name = fname
 			profile.last_name = lname
@@ -221,7 +230,6 @@ def update(request):
 			userprofile.image=pic
 			userprofile.saave()
 			profile.save()
-			print('tp2')
 			if a>1:
 				messages.success(request, 'Your Account has been updated!')
 			return redirect('songs-profile')

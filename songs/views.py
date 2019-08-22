@@ -8,6 +8,7 @@ from django.views.generic import (
 
 from songs.models import Song
 from users.models import Profile
+from django.utils.datastructures import MultiValueDictKeyError
 
 
 def home(request):
@@ -45,16 +46,32 @@ def updatesong(request,pk):
 		if request.method == 'POST':
 			title = request.POST['title']
 			lyrics = request.POST['lyrics']
-			if request.FILES['image']:
-				image = request.FILES['image']
-				song.img = image
-			else:
+			try:
+				if request.FILES['image']:
+					image = request.FILES['image']
+					path = song.img.path
+					import os
+					os.remove(path)
+					song.img = image 
+				else:
+					image = song.img
+					song.img = image
+			except MultiValueDictKeyError :
+				print("m")
 				image = song.img
 				song.img = image
-			if request.FILES['audio']!= song.audio:
-				audio = request.FILES['audio']
-				song.audio = audio
-			else:
+			try:
+				if request.FILES['audio']!= song.audio:
+					audio = request.FILES['audio']
+					path = song.audio.path
+					import os
+					os.remove(path)
+					song.audio = audio
+				else:
+					audio = song.audio
+					song.audio = audio
+			except MultiValueDictKeyError:
+				print("m")
 				audio = song.audio
 				song.audio = audio
 			ytlink = request.POST['ytlink']

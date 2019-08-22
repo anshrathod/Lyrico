@@ -4,7 +4,7 @@
 		body{
 			background  : url("/media/background_1200.jpg") ;
 			background-size:cover;
-            background-repeat:no-repeat;
+            background-repeat:repeat;
             overflow-x :hidden; 
 		}
 </style>
@@ -70,4 +70,26 @@
 </body>
 {% block footer %}
 {% endblock %}
+
+<script>
+$(document).ready(function() {
+   $("textarea").each(function(){	
+    $(this).css("border-radius","10px");
+    $(this).css("border-color","grey");
+    $(this).css("resize","none");
+    });
+   $(".btn").each(function(){	
+    $(this).css("border-radius","5px");
+    $(this).css("border-color","grey");
+    });
+   $(".img").each(function(){	
+    $(this).css("border-radius","5px");
+    $(this).css("border-color","grey");
+    });
+   $("legend").each(function(){	
+    $(this).css("border-radius","0px");
+    $(this).css("border-color","grey");
+    });
+});
+</script>
 </html>
