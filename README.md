@@ -36,4 +36,5 @@ Thank you for solving all my errors that occured during this project.
 ## Pull requests welcome!
 
 Spotted an error? Something doesn't make sense? Send me a pull request! Please avoid making stylistic changes though -- they are unlikely to be accepted. Thanks!
-MIT © [Ansh Rathod](https://github.com/anshrathod)
+
+## MIT © [Ansh Rathod](https://github.com/anshrathod)
