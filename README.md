@@ -19,7 +19,7 @@
 `cd to the root directory`<br>
 `python manage.py runserver`
 
-## Credits
+## Error Solvers :joy::joy:
 Thank you for solving all my errors that occured during this project.
 - [Anay Kulkarni](https://github.com/Anay121)
 - [Karan Sheth](https://github.com/Korusuke)
