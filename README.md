@@ -19,7 +19,7 @@
 `cd to the root directory`<br>
 `python manage.py runserver`
 
-## Error Solvers :joy::joy:
+## Error Solvers :joy:
 Thank you for solving all my errors that occured during this project.
 - [Anay Kulkarni](https://github.com/Anay121)
 - [Karan Sheth](https://github.com/Korusuke)
@@ -28,4 +28,4 @@ Thank you for solving all my errors that occured during this project.
 
 Spotted an error? Something doesn't make sense? Send me a pull request! Please avoid making stylistic changes though -- they are unlikely to be accepted. Thanks!
 
-## MIT © [Ansh Rathod](https://github.com/anshrathod)
+#### MIT © [Ansh Rathod](https://github.com/anshrathod)
