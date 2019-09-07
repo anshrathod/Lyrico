@@ -14,10 +14,11 @@
 - If u are a artist it provides you a platform to showcase your art and listen to songs of other artists.
 
 ## How to use?
-- Install python<br>
+Install python<br>
 `pip install django`<br>
 `cd to the root directory`<br>
-`python manage.py runserver`
+`python manage.py runserver`<br>
+Open any browser @ `localhost:8000`<br>
 
 ## Error Solvers :joy:
 Thank you for solving all my errors that occured during this project.
