@@ -26,22 +26,8 @@ def home(request):
 		return render(request, 'songs/listview.html', context) 
 	return render(request,'songs/base.html')
 
-class SongUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
-	model=Song
-	fields=['title','lyrics','img']
-	# def form_valid(self,form):
-	# 	self.request.user in [form.instance.composer,form.instance.featuring]
-	# 	return super().form_valid(form)
-
-	def test_func(self):
-		# song=self.get_object()
-		# if self.request.user in [song.composer,song.featuring]:
-		return True
-		# return False
 def updatesong(request,pk):
 	song = Song.objects.get(id=pk)
-	print(song.composer)
-	print(request.user)
 	if request.user.username == song.composer:
 		if request.method == 'POST':
 			title = request.POST['title']
@@ -57,7 +43,6 @@ def updatesong(request,pk):
 					image = song.img
 					song.img = image
 			except MultiValueDictKeyError :
-				print("m")
 				image = song.img
 				song.img = image
 			try:
@@ -71,7 +56,6 @@ def updatesong(request,pk):
 					audio = song.audio
 					song.audio = audio
 			except MultiValueDictKeyError:
-				print("m")
 				audio = song.audio
 				song.audio = audio
 			ytlink = request.POST['ytlink']
@@ -95,16 +79,12 @@ def updatesong(request,pk):
 		messages.warning(request,'You tried to update Song of another User.Conducting such tasks may result in deactivation of your account.')
 		return redirect('songs-home')
 
-
 class SongDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Song
     success_url = '/'
 
     def test_func(self):
-        # print(self.get_object())
-        if self.request.user == self.get_object().composer:
-        	return True
-        return False
+        return str(self.get_object().composer) == str(self.request.user)
 
 def list(request):
 	songs = Song.objects.all()
