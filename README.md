@@ -7,7 +7,7 @@ It is a collaborative platform targeted towards ardent music lovers and budding 
 [![made-with-python](https://img.shields.io/badge/made%20with-Python-blue)](#)
 [![made-with-django](https://img.shields.io/badge/made%20with-Django-blue)](#)
  
-## Screenshots
+## Screenshots:
 
 ## Features:
 - A decentralised approach to reading lyrics, listening to music, and watching videos on the same page.  
