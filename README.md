@@ -15,15 +15,15 @@ It is a collaborative platform targeted towards ardent music lovers and budding 
 - Provides a platform for music lovers to add their favourite pieces and songs. 
 
 ## Steps To Install:
-`Install Python v3.x`
-`pip install django`
-`cd to the root folder`
-`Execute python manage.py runserver`
-`Open any browser @ localhost:8000`
+`Install Python v3.x`  
+`pip install django`  
+`cd to the root folder`  
+`Execute python manage.py runserver`  
+`Open any browser @ localhost:8000`  
 
 ## Special Thanks:
 - [Anay Kulkarni](https://github.com/Anay121)
-- [Karan Sheth](https://github.com/Korusuke)
+- [Karan Sheth](https://github.com/Korusuke)  
 Thank you for helping me with this project, and sticking with me through the buggiest of times!
 
 ## Pull requests welcome!
@@ -31,7 +31,3 @@ Thank you for helping me with this project, and sticking with me through the bug
 Spotted an error? Something doesn't make sense? Send me a pull request! Please avoid making stylistic changes though -- they are unlikely to be accepted. Thanks!
 
 #### MIT © [Ansh Rathod](https://github.com/anshrathod)
-
-
-
-
