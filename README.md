@@ -1,32 +1,37 @@
 # LYRICO
-**LYRICO** is a website where you can get lyrics,audio and video for various songs added by not so famous artists.<br>
-**LYRICO** is a platform for budding artists to release their songs without a major label.
-### Website link
+**LYRICO** is a public website hosted using Github where any individual can access information such as lyrics, audio, and video pertaining to various songs added by unknown artists and fans.<br>
+It is a collaborative platform targeted towards ardent music lovers and budding artists that are not associated with a major music label. It was developed with the aim of providing a free hosting service and to promote various musicians around the world. 
+### Project link:
 [https://lyrico.com](http://rathosansh.pythonanywhere.com)
-## Softwares Used
-[![made-with-python](https://img.shields.io/badge/made%20with-python-blue)](#)
+## Softwares Used:
+[![made-with-python](https://img.shields.io/badge/made%20with-Python-blue)](#)
 [![made-with-django](https://img.shields.io/badge/made%20with-Django-blue)](#)
  
 ## Screenshots
 
-## Features
-- You can listen to the song,read its lyrics and view its video on the same page.
-- If u are a artist it provides you a platform to showcase your art and listen to songs of other artists.
+## Features:
+- A decentralised approach to reading lyrics, listening to music, and watching videos on the same page.  
+- Provides a platform for budding artists to showcase their work. 
+- Provides a platform for music lovers to add their favourite pieces and songs. 
 
-## How to use?
-Install python<br>
-`pip install django`<br>
-`cd to the root directory`<br>
-`python manage.py runserver`<br>
-Open any browser @ `localhost:8000`<br>
+## Steps To Install:
+`Install Python v3.x`
+`pip install django`
+`cd to the root folder`
+`Execute python manage.py runserver`
+`Open any browser @ localhost:8000`
 
-## Error Solvers :joy:
-Thank you for solving all my errors that occured during this project.
+## Special Thanks:
 - [Anay Kulkarni](https://github.com/Anay121)
 - [Karan Sheth](https://github.com/Korusuke)
+Thank you for helping me with this project, and sticking with me through the buggiest of times!
 
 ## Pull requests welcome!
 
 Spotted an error? Something doesn't make sense? Send me a pull request! Please avoid making stylistic changes though -- they are unlikely to be accepted. Thanks!
 
 #### MIT © [Ansh Rathod](https://github.com/anshrathod)
+
+
+
+
