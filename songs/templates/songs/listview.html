@@ -1,187 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-		body{
-			background  : url("https://raw.githubusercontent.com/anshrathod/image/master/background_1200.jpg") ;
-			background-size:cover;
-      background-repeat:repeat;
-      overflow-x :hidden; 
-		}
-</style>
-<head>
-    <meta charset="UTF-8">
-    <title>LYRICO -All Songs</title>
-    {% load staticfiles %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</head>
-<body>
-    <nav class="navbar navbar-inverse fixed">
-        <div class="row">
-            <!-- Header -->
-            <div class="float-lef">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{% url 'songs-home'%}"><d style="color:#d82c3c;font-size:25px;padding-left: 50% ">LYRICO</d></a>
-                </div>
-            </div>  
-            <!-- Items -->
-            <div style="float:right;padding-right: 5%;margin-right:2%">
-                <div class="collapse navbar-collapse" id="topNavBar">
-                    <ul class="nav navbar-nav">
-                        <li><a style="color:#fde441" href="{% url 'songs-listsongs'%}">ALL SONGS</a></li>
-                        {% comment %} <li><a style="color:#fde441" href="{% url 'songs-allsongs'%}">BOX VIEW</a></li> {% endcomment %}
-                        <li>
-                            {% comment %} <form class="form-inline " method="POST" style="padding-top: 3%;">
-                                {% csrf_token %}
-                                <input class="form-control " type="search" placeholder="Search Song" aria-label="Search" name="search" >
-                                <button class="btn btn-outline-success " type="submit">Search</button>
-                            </form> {% endcomment %}
-                        </li>
-                        {% if user.is_authenticated %}
-                            <li><a style="color:#fde441" href="{% url 'songs-profile'%}">Welcome,{{user}}</a></li>
-                            <li><a style="color:#fde441" href="{% url 'songs-logout'%}">LOG OUT</a></li>
-                        {% else %}
-                        <li><a style="color:#fde441" href="{% url 'songs-login'%}">LOG IN</a></li>
-                        <li><a style="color:#fde441" href="{% url 'songs-signup'%}">REGISTER</a></li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
-<div class="container">
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">{{message}}
-        </div>
-    {% endfor %}
-{% endif %}
-  <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
   <style>
-    .well{
-        border-radius:10px;
-        border-color:grey;
-        margin:2%;
-        margin-bottom:0%;
+    body {
+      background: url("https://raw.githubusercontent.com/anshrathod/image/master/background_1200.jpg");
+      background-size: cover;
+      background-repeat: repeat;
+      overflow-x: hidden;
     }
   </style>
-  <div class="row" id="songs">
-    <div class="well col-md-5 col-xs-8 col-sm-8 col-lg-5"style="float: right;">
-      <div class="form-group">
-        <div class="input-group">
-        <span class="input-group-addon glyphicon glyphicon-search"></span>
-          <input class="search col-md-12 form-control " style="margin-top:0.5%" placeholder="Search"/>
+  <head>
+    <meta charset="UTF-8" />
+    <title>LYRICO -All Songs</title>
+    {% load static %}
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Satisfy"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse fixed">
+      <div class="row">
+        <!-- Header -->
+        <div class="float-lef">
+          <div class="navbar-header">
+            <button
+              type="button"
+              class="navbar-toggle"
+              data-toggle="collapse"
+              data-target="#topNavBar"
+            >
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'songs-home'%}"
+              ><d style="color: #d82c3c; font-size: 25px; padding-left: 50%"
+                >LYRICO</d
+              ></a
+            >
+          </div>
+        </div>
+        <!-- Items -->
+        <div style="float: right; padding-right: 5%; margin-right: 2%">
+          <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+              <li>
+                <a style="color: #fde441" href="{% url 'songs-listsongs'%}"
+                  >ALL SONGS</a
+                >
+              </li>
+              {% comment %}
+              <li>
+                <a style="color: #fde441" href="{% url 'songs-allsongs'%}"
+                  >BOX VIEW</a
+                >
+              </li>
+              {% endcomment %}
+              <li>
+                {% comment %}
+                <form class="form-inline" method="POST" style="padding-top: 3%">
+                  {% csrf_token %}
+                  <input
+                    class="form-control"
+                    type="search"
+                    placeholder="Search Song"
+                    aria-label="Search"
+                    name="search"
+                  />
+                  <button class="btn btn-outline-success" type="submit">
+                    Search
+                  </button>
+                </form>
+                {% endcomment %}
+              </li>
+              {% if user.is_authenticated %}
+              <li>
+                <a style="color: #fde441" href="{% url 'songs-profile'%}"
+                  >Welcome,{{user}}</a
+                >
+              </li>
+              <li>
+                <a style="color: #fde441" href="{% url 'songs-logout'%}"
+                  >LOG OUT</a
+                >
+              </li>
+              {% else %}
+              <li>
+                <a style="color: #fde441" href="{% url 'songs-login'%}"
+                  >LOG IN</a
+                >
+              </li>
+              <li>
+                <a style="color: #fde441" href="{% url 'songs-signup'%}"
+                  >REGISTER</a
+                >
+              </li>
+              {% endif %}
+            </ul>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <p class="col-md-3 col-sm-3 col-xs-6 col-lg-3" style="margin-top:2%">Sort By:</p>
-        <div class="col-md-3 col-sm-2 col-xs-12 col-lg-3"><button class="sort btn btn-primary btn-block" style="margin-top:1%" data-sort="title">Title</button></div>
-        <div class="col-md-3 col-sm-2 col-xs-12 col-lg-3"><button class="sort btn btn-primary btn-block" style="margin-top:1%" data-sort="composer">Composer</button></div>
-        <div class="col-md-3 col-sm-2 col-xs-12 col-lg-3"><button class="sort btn btn-primary btn-block" style="margin-top:1%" data-sort="genre">Genre</button></div>
-      </div>
-    </div>
-    <div class="well col-md-12 col-xs-12 col-sm-12 col-lg-12"style="margin-top:2%">
-      <div class="row" style="padding:2%;">
-        <div class="col-md-1 col-sm-6 col-xs-6 col-lg-1 text text-center"><h4>Cover</h4></div>
-        <div class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center"><h4>Song Title</h4></div>
-        <div class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center"><h4>Composer</h4> </div>
-        <div class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center"><h4>Other Artists</h4></div>
-        <div class="col-md-1 col-sm-6 col-xs-6 col-lg-1 text text-center"><h4>Genre</h4></div>
-        <div class="col-md-4 col-sm-6 col-xs-6 col-lg-4 text text-center"><h4>Youtube link </h4></div>
-      </div>
-      <div class="list">
-        {% for song,range in songs %}
-          <div class="row" style="padding : 2%;">
-            <div class="col-md-1 col-sm-4 col-xs-4 col-lg-1 text text-center">
-              <img class="id img-rounded img-thumbnail" src="{{ song.img.url }}" style="max-width:125%;max-height:125%;">
+    </nav>
+    <div class="container">
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{message}}</div>
+      {% endfor %} {% endif %}
+      <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+      <style>
+        .well {
+          border-radius: 10px;
+          border-color: grey;
+          margin: 2%;
+          margin-bottom: 0%;
+        }
+      </style>
+      <div class="row" id="songs">
+        <div
+          class="well col-md-5 col-xs-8 col-sm-8 col-lg-5"
+          style="float: right"
+        >
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon glyphicon glyphicon-search"></span>
+              <input
+                class="search col-md-12 form-control"
+                style="margin-top: 0.5%"
+                placeholder="Search"
+              />
             </div>
-            <div class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center" >
-              <a href="{% url 'songs-details' song.id %}">
-                <span class="title text text-muted" style="font-size:125%;color:black;">{{ song.title }}</span>
-              </a>
+          </div>
+          <div class="row">
+            <p
+              class="col-md-3 col-sm-3 col-xs-6 col-lg-3"
+              style="margin-top: 2%"
+            >
+              Sort By:
+            </p>
+            <div class="col-md-3 col-sm-2 col-xs-12 col-lg-3">
+              <button
+                class="sort btn btn-primary btn-block"
+                style="margin-top: 1%"
+                data-sort="title"
+              >
+                Title
+              </button>
+            </div>
+            <div class="col-md-3 col-sm-2 col-xs-12 col-lg-3">
+              <button
+                class="sort btn btn-primary btn-block"
+                style="margin-top: 1%"
+                data-sort="composer"
+              >
+                Composer
+              </button>
+            </div>
+            <div class="col-md-3 col-sm-2 col-xs-12 col-lg-3">
+              <button
+                class="sort btn btn-primary btn-block"
+                style="margin-top: 1%"
+                data-sort="genre"
+              >
+                Genre
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="well col-md-12 col-xs-12 col-sm-12 col-lg-12"
+          style="margin-top: 2%"
+        >
+          <div class="row" style="padding: 2%">
+            <div class="col-md-1 col-sm-6 col-xs-6 col-lg-1 text text-center">
+              <h4>Cover</h4>
             </div>
             <div class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center">
-              <span class="composer">{{ song.composer }}</span> 
+              <h4>Song Title</h4>
             </div>
-            <div class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center featuring">
-              <p class="featuring mr-2">{{ song.featuring }}</p>
+            <div class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center">
+              <h4>Composer</h4>
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center">
+              <h4>Other Artists</h4>
             </div>
             <div class="col-md-1 col-sm-6 col-xs-6 col-lg-1 text text-center">
-              <span class="genre">{{ song.genre }}</span> 
+              <h4>Genre</h4>
             </div>
-            <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4 text text-center">
-              <a class='ytlink text text-muted' href="{{ song.ytlink }}" >{{ song.ytlink }}</a> 
-            </div>    
+            <div class="col-md-4 col-sm-6 col-xs-6 col-lg-4 text text-center">
+              <h4>Youtube link</h4>
+            </div>
           </div>
-        
-        {% empty %}
-        <div class="alert alert-danger">
-          <strong><h3>NO SUCH SONG EXIST!</h3></strong>
-          <p>None of our songs contain <strong>{{ searchterm }}</strong>.</p>
-        </div> 
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-</div>
-</body>
-
-<style>
-.foooter {
-   position:relative;
-   left: 0%;
-   bottom: 0%;
-   width: 100%;
-   text-align: center;
-   margin-top:10%;
-}
-.well{
-  margin:0%;
-}
-</style>
-<footer class="foooter" >
-        <div class="well">
-            <div class="row">
-                <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
-                  <a href="#" class="fa fa-facebook"></a>
-                </div>
-                <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
-                  <a href="#" class="fa fa-twitter"></a>
-                </div>
-                <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
-                  <a href="#" class="fa fa-instagram"></a>
-                </div>
-                <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
-                    <a href="#" class="fa fa-google"></a>
-                </div>
-                <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
-                    <a href="#" class="fa fa-linkedin"></a>
-                </div>
-                <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
-                    <a href="#" class="fa fa-youtube"></a>
-                </div>
-              <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6  text-center">
-                © 2019 Copyright:
-                <a href="">lyrico.com</a>  
+          <div class="list">
+            {% for song,range in songs %}
+            <div class="row" style="padding: 2%">
+              <div class="col-md-1 col-sm-4 col-xs-4 col-lg-1 text text-center">
+                <img
+                  class="id img-rounded img-thumbnail"
+                  src="{{ song.img.url }}"
+                  style="max-width: 125%; max-height: 125%"
+                />
+              </div>
+              <div class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center">
+                <a href="{% url 'songs-details' song.id %}">
+                  <span
+                    class="title text text-muted"
+                    style="font-size: 125%; color: black"
+                    >{{ song.title }}</span
+                  >
+                </a>
+              </div>
+              <div class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center">
+                <span class="composer">{{ song.composer }}</span>
+              </div>
+              <div
+                class="col-md-2 col-sm-6 col-xs-6 col-lg-2 text text-center featuring"
+              >
+                <p class="featuring mr-2">{{ song.featuring }}</p>
+              </div>
+              <div class="col-md-1 col-sm-6 col-xs-6 col-lg-1 text text-center">
+                <span class="genre">{{ song.genre }}</span>
+              </div>
+              <div
+                class="col-md-4 col-sm-12 col-xs-12 col-lg-4 text text-center"
+              >
+                <a class="ytlink text text-muted" href="{{ song.ytlink }}"
+                  >{{ song.ytlink }}</a
+                >
               </div>
             </div>
+
+            {% empty %}
+            <div class="alert alert-danger">
+              <strong><h3>NO SUCH SONG EXIST!</h3></strong>
+              <p>
+                None of our songs contain <strong>{{ searchterm }}</strong>.
+              </p>
+            </div>
+            {% endfor %}
+          </div>
         </div>
-</footer>
+      </div>
+    </div>
+  </body>
 
-<script type="text/javascript">
-    var options= {
-      valueNames:['title','composer','featuring','genre']
+  <style>
+    .foooter {
+      position: relative;
+      left: 0%;
+      bottom: 0%;
+      width: 100%;
+      text-align: center;
+      margin-top: 10%;
+    }
+    .well {
+      margin: 0%;
+    }
+  </style>
+  <footer class="foooter">
+    <div class="well">
+      <div class="row">
+        <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
+          <a href="#" class="fa fa-facebook"></a>
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
+          <a href="#" class="fa fa-twitter"></a>
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
+          <a href="#" class="fa fa-instagram"></a>
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
+          <a href="#" class="fa fa-google"></a>
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
+          <a href="#" class="fa fa-linkedin"></a>
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-1 col-lg-1">
+          <a href="#" class="fa fa-youtube"></a>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6 text-center">
+          © 2019 Copyright:
+          <a href="">lyrico.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="text/javascript">
+    var options = {
+      valueNames: ["title", "composer", "featuring", "genre"],
     };
-    console.log("hey")
-    var userList = new List('songs', options);
-</script>
-
+    console.log("hey");
+    var userList = new List("songs", options);
+  </script>
 </html>
