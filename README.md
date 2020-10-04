@@ -1,5 +1,7 @@
 # LYRICO
 
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-red?logo=python&logoColor=3776AB&labelColor=cccccc&color=3776AB)](https://www.python.org/) [![made-with-django](https://img.shields.io/badge/Made%20using-Django-blue?logo=django&logoColor=092E20&labelColor=cccccc&color=092E20)](#)
+
 **LYRICO** is a public website hosted using Github where any individual can access information such as lyrics, audio, and video pertaining to various songs added by unknown artists and fans.<br>
 It is a collaborative platform targeted towards ardent music lovers and budding artists that are not associated with a major music label. It was developed with the aim of providing a free hosting service and to promote various musicians around the world.
 
@@ -7,9 +9,16 @@ It is a collaborative platform targeted towards ardent music lovers and budding 
 
 [https://rathosansh.pythonanywhere.com](http://rathosansh.pythonanywhere.com)
 
-## Softwares Used:
+## Tech
 
-[![made-with-python](https://img.shields.io/badge/made%20with-Python-blue)](#) [![made-with-django](https://img.shields.io/badge/made%20with-Django-blue)](#)
+Lyrico uses a number of open source projects to work properly:
+
+| Framework/Tech                               | Decription                                                                                                                                                                                          |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **[Python](https://www.python.org/)**        | _Python is an interpreted, high-level and general-purpose programming language._                                                                                                                    |
+| **[Django](https://www.djangoproject.com/)** | _Django is a Python-based free and open-source web framework that follows the model-template-views architectural pattern._                                                                          |
+| **[Pillow](https://pillow.readthedocs.io/)** | _Python Imaging Library is a free and open-source additional library for the Python programming language that adds support for opening, manipulating, and saving many different image file formats_ |
+| **[SQLite](https://www.sqlite.org/)**        | _SQLite is a relational database management system contained in a C library._                                                                                                                       |
 
 ## Screenshots:
 
